@@ -18,21 +18,28 @@ namespace Diplom2017.Controllers
         [HttpPost]
         public ActionResult Index(string name, string password)
         {
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(password))
             {
                 ModelState.AddModelError("Error", "Wrong name or password");
             }
             else
             {
-               
+                // If user exist then return his page
                 return View("User");
             }
             return View();
         }
-
         public ActionResult User()
         {
             return View();
+        }
+        public void Online(string name)
+        {
+           
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"F:\Git\LessonManagement\Diplom2017\Content\Online\WriteText.txt", true))
+            {
+                file.WriteLine(name);
+            }
         }
 
     }

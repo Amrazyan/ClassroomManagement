@@ -1,47 +1,96 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="bootstrap/js/jquery-3.2.1.min.js"></script>
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/css/style.css" rel="stylesheet" />
+    <script src="~/Content/myJS/Jquery.js"></script> 
+    <script src="~/Content/myJS/HighCharts.js"></script>  
+    <script src="~/Content/myJS/HighChartExport.js"></script>  
+    <script src="~/Content/myJS/Charts.js"></script> 
 
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> <!--Diagram Script-->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/mycss.css" rel="stylesheet" />
+
+    <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
+    <!--Diagram Script-->
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
     <title>Document</title>
 </head>
 <body>
+    <nav class="navbar my_nav">
+        <!-- Navbar content -->
+        <img src="~/Content/Photos/Logo.png" class="logo" />
+        <div>
+            Hambardzumyan K.
+        </div>
+    </nav>
     <div class="container-fluent">
-        <div class="row">
-            <div class="col-md-5 col-sm-5 col-xs-5" style="height:100%; ">
-                <div id="piechart">
+        <div class="row" style="width:100%;">
+            <div class="col-md-2 col-sm-2 col-xs-2">
+                <div class="sidenav" id="leftNav" style="left:0;">
+                    <span class="sp" onclick="openLNav()"><p> &#8250;</p></span>
+                    <!-- <select class="drop form-control"  id="exampleSelect1">    ////////CHANGINGS HERE
+                        <option>Հ419-1</option>
+                        <option>Հ419-2</option>
+                        <option>Հ419-3</option>
+                    </select> -->
+                    </br>
+                    </br>
+                    <h5>  <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Active Students</h5>
+                    <hr>
+                    <div class="pad">
+                        <div>Արման Ամրազյան<i class="my_badge">&nbsp;</i></div>
+
+                        <div>Տիգրան Կոշեցյան <i class="my_badge">&nbsp;</i></div>
+                        <div>Հայկ Ալթունյան <i class="my_badge">&nbsp;</i></div>
+                        <div>Արման Հովհաննիսյան <i class="my_badge">&nbsp;</i></div>
+                        <div>Էդիտա Սահակյան <i class="my_badge">&nbsp;</i></div>
+                        <div>Լիլիթ Կարապետյան<i class="my_badge">&nbsp;</i></div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-10 col-sm-10 col-xs-10" style="padding:0;">
+                <div class="row" style="height:200px; background-color:#e26942;">
+                    <div id="piechart" style="float:left;"></div>
+                    <div id="piechart1" style="float:left;"></div>
 
                 </div>
-                <span style="font-size:30px; cursor:pointer; top:0; position:absolute; float:left; margin-left:4%" onclick="openLNav()">&#9776;</span>
-            </div>
-
-            <div class="col-md-5 col-sm-5 col-xs-5" style="height:400px;">
-
-
-            </div>
-
-            <div class="col-md-2 col-sm-2 col-xs-2" style="height:200px;">
-                <div class="col-md-12 col-sm-12 col-xs-12" style="height:200px; ">
-                    <span style="font-size:30px; cursor:pointer; float:right; margin-right:4%" onclick="openNav()">&#9776;</span>
+                <div class="col-md-4 col-sm-4 col-xs-4">
+                    <div class="">
+                        <div id="container" class="capsula"></div>
+                    </div>
                 </div>
+                <div class="col-md-4 col-sm-4 col-xs-4">
+                    <div class="">
+                        <div id="container1" class="capsula"></div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-4">
+                    <div class="">
+                        <div id="container2" class="capsula"></div>
+                    </div>
+                </div>
+
+
             </div>
+
+            <!-- <div class="col-md-4 col-sm-4 col-xs-4" style="height:200px;">
+                <div class="col-md-12 col-sm-12 col-xs-12"  style="height:200px; ">
+                        <span style="font-size:30px; cursor:pointer; float:right; margin-right:4%" onclick="openNav()">&#9776;</span>
+                </div>
+            </div> -->
         </div>
     </div>
     <!-- LEFT SLIDING MENU ////////////////////////////////////////////////////////////////////////////////// -->
-    <div class="sidenav" id="leftNav" style="left:0;">
-        <a href="#" class="closebtn" onclick="closeLNav()">&times;</a>
+    <!-- <div class="sidenav" id="leftNav" style="left:0;">
+            <!-- <a href="#" class="closebtn" onclick="closeLNav()">&times;</a>
 
         <table class="table">
             <thead>
@@ -52,7 +101,7 @@
                     <th>Answer1</th>
                     <th>Answer1</th>
                     <th>Right Answer</th>
-                </tr>
+                  </tr>
             </thead>
             <tbody>
                 <tr>
@@ -64,103 +113,20 @@
                     <td>4</td>
                 </tr>
                 <tr>
-                    <td>What is reference type in C#?</td>
-                    <td>int</td>
-                    <td>value</td>
-                    <td>struct</td>
-                    <td>class</td>
-                    <td>4</td>
-                </tr>
+                        <td>What is reference type in C#?</td>
+                        <td>int</td>
+                        <td>value</td>
+                        <td>struct</td>
+                        <td>class</td>
+                        <td>4</td>
+                    </tr>
             </tbody>
         </table>
-    </div>
-    <!-- //////////////////////////////////////////////////////////////////////////////////////////// -->
-    <!-- RIGHT SLIDING MENU ////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-    <div class="sidenav" id="rightNav" style="right:0;">
-        <div class="pad">
-            <a href="#" class="closebtn" onclick="closeNav()">&times;</a>
-            <h4> <span class="badge badge-success">Arsein Papazyan</span></h4>
-            <h4> <span class="badge badge-success">Arman Amrazyan</span></h4>
-            <h4> <span class="badge badge-success">Arsein Papazyan</span></h4>
-            <h4> <span class="badge badge-success">Arman Amrazyan</span></h4>
-            <h4> <span class="badge badge-success">Arsein Papazyan</span></h4>
-            <h4> <span class="badge badge-success">Arman Amrazyan</span></h4>
-            <h4> <span class="badge badge-success">Arsein Papazyan</span></h4>
-            <h4> <span class="badge badge-success">Arman Amrazyan</span></h4>
-            <h4> <span class="badge badge-success">Arsein Papazyan</span></h4>
-            <h4> <span class="badge badge-success">Arman Amrazyan</span></h4>
-            <h4> <span class="badge badge-success">Arsein Papazyan</span></h4>
-            <h4> <span class="badge badge-success">Arman Amrazyan</span></h4>
-            <h4> <span class="badge badge-success">Arsein Papazyan</span></h4>
-            <h4> <span class="badge badge-success">Arman Amrazyan</span></h4>
-            <h4> <span class="badge badge-success">Arsein Papazyan</span></h4>
-            <h4> <span class="badge badge-success">Arman Amrazyan</span></h4>
-            <h4> <span class="badge badge-success">Arsein Papazyan</span></h4>
-            <h4> <span class="badge badge-success">Arman Amrazyan</span></h4>
-            <h4> <span class="badge badge-success">Arsein Papazyan</span></h4>
-            <h4> <span class="badge badge-success">Arman Amrazyan</span></h4>
-            <h4> <span class="badge badge-success">Arsein Papazyan</span></h4>
-            <h4> <span class="badge badge-success">Arman Amrazyan</span></h4>
-        </div>
-    </div>
-    <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-    <script src="bootstrap/js/bootstrap.js"></script>
+    </div> -->
+   
 
-
-    <script type="text/javascript">
-    //    ( function () {
-    //         for(var i = 0 ; i<5 ; i++)
-    //         {
-    //         $("#sideNav").append(
-    //             ' <button type="button" class="btn btn-default btn-xs">Added Button</button> '
-    //         );
-    //         }
-    //     }   /// LOGGED STUDENTS DEMO
-    //    )();
-
-    function openLNav(){
-            document.getElementById("leftNav").style.width = "500px";
-            closeNav();
-        }
-
-        function closeLNav(){
-            document.getElementById("leftNav").style.width = "0px";
-        }
-        function openNav(){
-            document.getElementById("rightNav").style.width = "200px";
-            closeLNav();
-        }
-        function closeNav(){
-            document.getElementById("rightNav").style.width = "0px";
-        }
-
-
-    </script>
-
-    <script>
-        // Load google charts
-        window.onload = function () {
-            google.charts.load('current', {'packages':['corechart']});
-            google.charts.setOnLoadCallback(drawChart);
-            drawChart();
-      }
-        // Draw the chart and set the chart values
-function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-    ['Task', 'Hours per Day'],
-    ['Work', 8],
-    ['Eat', 2],
-    ['TV', 4],
-    ['Gym', 2],
-    ['Sleep', 8]
-    ]);
-
-    var options = {'title':'My Average Day', 'width':550, 'height':400};
-    var a = new google.visualization.PieChart(document.getElementById('piechart'));
-    a.draw(data,options);
-}
-    </script>
-
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Content/myJS/script.js"></script>
 
 </body>
 </html>
