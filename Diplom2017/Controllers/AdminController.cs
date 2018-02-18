@@ -26,7 +26,8 @@ namespace Diplom2017.Controllers
             {               
                 foreach (var it in text)
                 {
-                    hyp += $"<h4> <span class=\"badge badge-success\">{it}</span></h4> ";
+                    hyp += $"<div> {it} <i class=\"my_badge\">&nbsp;</i></div>";
+                   // $"<h4> <span class=\"badge badge-success\">{it}</span></h4> ";
                 }
             }
             
