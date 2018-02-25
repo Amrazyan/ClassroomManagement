@@ -12,11 +12,19 @@ namespace Diplom2017.Controllers
     {
        
         // GET: Admin
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
+        public ActionResult Statistics()
         {
             return View();
         }
-        
+        public ActionResult DayStatic()
+        {
+            return View();
+        }
+
         public ActionResult OnlineUsers()
         {
              string[] text = System.IO.File.ReadAllLines(@"F:\Git\LessonManagement\Diplom2017\Content\Online\WriteText.txt");
@@ -27,7 +35,6 @@ namespace Diplom2017.Controllers
                 foreach (var it in text)
                 {
                     hyp += $"<div> {it} <i class=\"my_badge\">&nbsp;</i></div>";
-                   // $"<h4> <span class=\"badge badge-success\">{it}</span></h4> ";
                 }
             }
             

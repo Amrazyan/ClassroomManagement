@@ -11,7 +11,10 @@
     <script src="~/Content/myJS/Charts.js"></script> 
 
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
     <link href="~/Content/css/mycss.css" rel="stylesheet" />
+    <link href="~/Content/css/StyleSheet1.css" rel="stylesheet" />
+    <link href="~/Content/css/mj.css" rel="stylesheet" runat="server" />
 
     <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
     <!--Diagram Script-->
@@ -33,19 +36,14 @@
         <div class="row" style="width:100%;">
             <div class="col-md-2 col-sm-2 col-xs-2">
                 <div class="sidenav" id="leftNav" style="left:0;">
-                    <span class="sp" onclick="openLNav()"><p> &#8250;</p></span>
-                    <!-- <select class="drop form-control"  id="exampleSelect1">    ////////CHANGINGS HERE
-                        <option>Հ419-1</option>
-                        <option>Հ419-2</option>
-                        <option>Հ419-3</option>
-                    </select> -->
+
+                    <span id="quest"  class="sp"><p> &#8250;</p></span>                   
                     </br>
                     </br>
                     <h5>  <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Active Students</h5>
                     <hr>
                     <div class="pad">
                         <div>Արման Ամրազյան<i class="my_badge">&nbsp;</i></div>
-
                         <div>Տիգրան Կոշեցյան <i class="my_badge">&nbsp;</i></div>
                         <div>Հայկ Ալթունյան <i class="my_badge">&nbsp;</i></div>
                         <div>Արման Հովհաննիսյան <i class="my_badge">&nbsp;</i></div>
@@ -54,73 +52,82 @@
 
                     </div>
                 </div>
+               
             </div>
 
             <div class="col-md-10 col-sm-10 col-xs-10" style="padding:0;">
                 <div class="row" style="height:200px; background-color:#e26942;">
-                    <div id="piechart" style="float:left;"></div>
-                    <div id="piechart1" style="float:left;"></div>
+                    <div class="porc" id="por">
+
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Questions</th>
+                                    <th>Answer1</th>
+                                    <th>Answer1</th>
+                                    <th>Answer1</th>
+                                    <th>Answer1</th>
+                                    <th>Right Answer</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>What is reference type in C#?</td>
+                                    <td>int</td>
+                                    <td>value</td>
+                                    <td>struct</td>
+                                    <td>class</td>
+                                    <td>4</td>
+                                </tr>
+                                <tr>
+                                    <td>What is reference type in C#?</td>
+                                    <td>int</td>
+                                    <td>value</td>
+                                    <td>struct</td>
+                                    <td>class</td>
+                                    <td>4</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <!---->
+                    @*<div id="piechart" style="float:left;"></div>
+                    <div id="piechart1" style="float:left;"></div>*@
 
                 </div>
-                <!--STATISTIC CONTAINER -->
-                <div class="row">
-                    <div class="col-sm-4 col-xs">                     
-                            <div id="container" class="capsula"></div>                     
-                    </div>
-                    <div class="col-sm-4 col-xs">                  
-                            <div id="container1" class="capsula"></div>                  
-                    </div>
-                    <div class="col-sm-4 col-xs">                         
-                            <div id="container2" class="capsula"></div>                         
-                    </div>
-                </div>
-
+               
+                @RenderBody()
+       
 
                 </div>
-
-                <!-- <div class="col-md-4 col-sm-4 col-xs-4" style="height:200px;">
-                    <div class="col-md-12 col-sm-12 col-xs-12"  style="height:200px; ">
-                            <span style="font-size:30px; cursor:pointer; float:right; margin-right:4%" onclick="openNav()">&#9776;</span>
-                    </div>
-                </div> -->
             </div>
         </div>
-        <!-- LEFT SLIDING MENU ////////////////////////////////////////////////////////////////////////////////// -->
-        <!-- <div class="sidenav" id="leftNav" style="left:0;">
-                <!-- <a href="#" class="closebtn" onclick="closeLNav()">&times;</a>
+    <script type="text/javascript">
+         $(document).ready(function () {
+             //$("#test").click(function () {
 
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Questions</th>
-                        <th>Answer1</th>
-                        <th>Answer1</th>
-                        <th>Answer1</th>
-                        <th>Answer1</th>
-                        <th>Right Answer</th>
-                      </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>What is reference type in C#?</td>
-                        <td>int</td>
-                        <td>value</td>
-                        <td>struct</td>
-                        <td>class</td>
-                        <td>4</td>
-                    </tr>
-                    <tr>
-                            <td>What is reference type in C#?</td>
-                            <td>int</td>
-                            <td>value</td>
-                            <td>struct</td>
-                            <td>class</td>
-                            <td>4</td>
-                        </tr>
-                </tbody>
-            </table>
-        </div> -->
+             //    $.ajax({
+             //        url: '/Admin/OnlineUsers',
+             //        type: "GET",
+             //      // data: JSON.stringify({ 'name': 'From user2' }),
+             //        contentType: "application/json",
+             //        dataType: "html",
 
+             //        success: function (data) {
+             //             $('.pad').append(data);
+             //        },
+             //        error: function () {
+             //            alert("ERROR");
+             //        }
+             //    });
+             //} 
+             //);
+             
+
+         });
+    </script>
 
         <script src="~/Scripts/bootstrap.js"></script>
         <script src="~/Content/myJS/script.js"></script>

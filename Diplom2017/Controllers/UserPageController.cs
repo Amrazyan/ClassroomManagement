@@ -33,6 +33,37 @@ namespace Diplom2017.Controllers
         {
             return View();
         }
+        public void Answers(int userAnswer, int rightAnswer)
+        {
+            string htmlTags = string.Empty;
+            if (userAnswer == rightAnswer)
+            {
+                for (int i = 1; i <= 4; i++)
+                {
+                    if (i == rightAnswer)
+                        htmlTags += "greenClass";
+                    else
+                        htmlTags += "grayClass";
+                }
+            }
+            else
+            {
+                for (int i = 1; i <= 4; i++)
+                {
+                    if (i == rightAnswer)
+                    {
+                        htmlTags += "greenClass";
+                        continue;
+                    }
+                    if (i == userAnswer)
+                    {
+                        htmlTags += "redClass";
+                        continue;
+                    }
+                    htmlTags += "grayClass";
+                }
+            }
+        }
         public void Online(string name)
         {
            
@@ -40,6 +71,7 @@ namespace Diplom2017.Controllers
             {
                 file.WriteLine(name);
             }
+
         }
 
     }

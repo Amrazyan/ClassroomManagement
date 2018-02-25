@@ -1,16 +1,24 @@
-﻿function openLNav() {
-    document.getElementById("leftNav").style.width = "500px";
-    //closeNav();
+﻿
+
+
+//$("#quest").click(function () {
+//    $(".porc").width("500px");
+//})
+var a = document.getElementById("quest");
+var b = document.getElementById("por");
+a.addEventListener("click", openn);
+function openn() {
+    b.style.width = "500px";
+    a.style.webkitTransform = 'rotate(180deg)';
+    a.style.transition = '0.2s';
+    a.removeEventListener("click", openn);
+    a.addEventListener("click",clos)
 }
-function closeLNav() {
-    document.getElementById("leftNav").style.width = "0px";
-}
-function openNav() {
-    document.getElementById("rightNav").style.width = "200px";
-    // closeLNav();
-}
-function closeNav() {
-    document.getElementById("rightNav").style.width = "0px";
+function clos() {
+    b.style.width = "0px";
+    a.style.webkitTransform = 'rotate(0deg)';
+    a.removeEventListener("click", clos);
+    a.addEventListener("click", openn);
 }
 
 
