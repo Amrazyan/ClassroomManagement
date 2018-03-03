@@ -1,12 +1,11 @@
 ﻿
 
 
-//$("#quest").click(function () {
-//    $(".porc").width("500px");
-//})
+
 var a = document.getElementById("quest");
 var b = document.getElementById("por");
 a.addEventListener("click", openn);
+
 function openn() {
     b.style.width = "500px";
     a.style.webkitTransform = 'rotate(180deg)';

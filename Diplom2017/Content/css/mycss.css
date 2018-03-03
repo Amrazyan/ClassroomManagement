@@ -127,3 +127,55 @@ p {
 .table {
     color: #777;
 }
+.card {
+    margin-top: 5px;
+    background: #fff;
+    border-radius: 2px;
+    height: 50px;
+    width: 100%;
+}
+
+    .card > p {
+        margin: 14px 0px 14px 15px;
+        color: black;
+    }
+
+.card-3 {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.card > * {
+    margin-left: 15px;
+    float: left;
+}
+
+.test {
+    height: 25px;
+    width: 25px;
+    background: #cbd1d8;
+    border: none;
+    border-radius: 50%;
+    margin: 13px 0 5px 5px;
+}
+
+.test-gr {
+    background: #40e08b;
+    content: '✔';
+}
+
+.test-red {
+    background: #eb4242;
+    content: '✔';
+}
+
+.porc {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    background-color: #111;
+    overflow-y: auto;
+    transition: 0.2s;
+    padding: 0px 0px 0px 0px;
+}
