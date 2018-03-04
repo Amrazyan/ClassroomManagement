@@ -5,10 +5,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="~/Content/myJS/Jquery.js"></script> 
-    <script src="~/Content/myJS/HighCharts.js"></script>  
-    <script src="~/Content/myJS/HighChartExport.js"></script>  
-    <script src="~/Content/myJS/Charts.js"></script> 
+    <script src="~/Content/myJS/Jquery.js"></script>
+    <script src="~/Content/myJS/HighCharts.js"></script>
+    <script src="~/Content/myJS/HighChartExport.js"></script>
+    <script src="~/Content/myJS/Charts.js"></script>
+    <script src="~/Content/myJS/Ajaxes.js"></script>
+
+
 
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
 
@@ -20,7 +23,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
 <body>
@@ -35,26 +38,20 @@
         <div class="row" style="width:100%;">
             <div class="col-md-2 col-sm-2 col-xs-2">
                 <div class="sidenav" id="leftNav" style="left:0;">
-                   
-                    <select class="selectpicker">
-                        <optgroup label="Lectures">          
-                            
-                            <option value="1">Bootstrap</option>
 
-                            <option value="2">JavaScript</option>
-
-                        </optgroup>
-                    </select>
-                    <select class="selectpicker">
-                        <optgroup label="Themes">
-                            <option value="2">Bootstrap</option>
-
-                            <option value="3">JavaScript</option>
-
+                    <select class="selectpicker" id="lect">
+                        <optgroup label="Lectures">
+                            @Html.Partial("_Lecture", Session["lections"])
                         </optgroup>
                     </select>
 
-                    <span id="quest"  class="sp"><p> &#8250;</p></span>                   
+                    <select class="selectpicker" id="theme">
+                        <optgroup label="Themes" id="thme">
+                            @Html.Partial("_Lecture", Session["themes"])
+                        </optgroup>
+                    </select>
+
+                    <span id="quest" class="sp"><p> &#8250;</p></span>
                     </br>
                     </br>
                     <h5>  <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Active Students</h5>
@@ -66,59 +63,63 @@
                         <div>Արման Հովհաննիսյան <i class="my_badge">&nbsp;</i></div>
                         <div>Էդիտա Սահակյան <i class="my_badge">&nbsp;</i></div>
                         <div>Լիլիթ Կարապետյան<i class="my_badge">&nbsp;</i></div>
-                       
+
 
                     </div>
                 </div>
-               
+
             </div>
 
             <div class="col-md-10 col-sm-10 col-xs-10" style="padding:0;">
                 <div class="row" style="height:200px; background-color:#e26942;">
                     <div class="porc" id="por">
-                        
-                        @Html.Partial("_question", Session["data"])
+
+                        @Html.Partial("_question", Session["date"])
 
                     </div>
                     <!---->
                     @*<div id="piechart" style="float:left;"></div>
-                    <div id="piechart1" style="float:left;"></div>*@
+                        <div id="piechart1" style="float:left;"></div>*@
 
                 </div>
-               
+
                 @RenderBody()
-       
 
-                </div>
+
             </div>
         </div>
+    </div>
     <script type="text/javascript">
-         $(document).ready(function () {
-             //$("#test").click(function () {
+        $(document).ready(function () {
+            //$("#test").click(function () {
 
-             //    $.ajax({
-             //        url: '/Admin/OnlineUsers',
-             //        type: "GET",
-             //      // data: JSON.stringify({ 'name': 'From user2' }),
-             //        contentType: "application/json",
-             //        dataType: "html",
+            //    $.ajax({
+            //        url: '/Admin/OnlineUsers',
+            //        type: "GET",
+            //      // data: JSON.stringify({ 'name': 'From user2' }),
+            //        contentType: "application/json",
+            //        dataType: "html",
 
-             //        success: function (data) {
-             //             $('.pad').append(data);
-             //        },
-             //        error: function () {
-             //            alert("ERROR");
-             //        }
-             //    });
-             //} 
-             //);
-             
+            //        success: function (data) {
+            //             $('.pad').append(data);
+            //        },
+            //        error: function () {
+            //            alert("ERROR");
+            //        }
+            //    });
+            //}
+            //);
 
-         });
+
+        });
     </script>
+    <script type="text/javascript">
 
-        <script src="~/Scripts/bootstrap.js"></script>
-        <script src="~/Content/myJS/script.js"></script>
 
-    </body>
-    </html>
+    </script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Content/myJS/script.js"></script>
+
+
+</body>
+</html>

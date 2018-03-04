@@ -5,13 +5,14 @@ using System.Web;
 
 namespace Diplom2017.Models
 {
-    public class Quest
+    public class Lectures
     {
-        public string Question { get; set; }
+        public int id { get; set; }
+        public string _Lectures { get; set; }
 
         public override string ToString()
         {
-            return Question + "";
+            return _Lectures + "";
         }
     }
 }
