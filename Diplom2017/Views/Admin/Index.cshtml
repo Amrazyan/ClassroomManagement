@@ -11,12 +11,14 @@
     <script src="~/Content/myJS/Charts.js"></script>
     <script src="~/Content/myJS/Ajaxes.js"></script>
 
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 
+    <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.3/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
 
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
 
     <link href="~/Content/css/mycss.css" rel="stylesheet" />
-    <link href="~/Content/css/StyleSheet1.css" rel="stylesheet" />
 
     <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
     <!--Diagram Script-->
@@ -27,29 +29,24 @@
     <title>Document</title>
 </head>
 <body>
-    <nav class="navbar my_nav">
-        <!-- Navbar content -->
-        <img src="~/Content/Photos/Logo.png" class="logo" />
-        <div>
-            Hambardzumyan K.
-        </div>
-    </nav>
+    
     <div class="container-fluent">
         <div class="row" style="width:100%;">
             <div class="col-md-2 col-sm-2 col-xs-2">
                 <div class="sidenav" id="leftNav" style="left:0;">
+                    <div class="drops" >
+                        <select class="form-control" id="lect">
+                            <optgroup label="Lectures">
+                                @Html.Partial("_Lecture", Session["lections"])
+                            </optgroup>
+                        </select>
 
-                    <select class="selectpicker" id="lect">
-                        <optgroup label="Lectures">
-                            @Html.Partial("_Lecture", Session["lections"])
-                        </optgroup>
-                    </select>
-
-                    <select class="selectpicker" id="theme">
-                        <optgroup label="Themes" id="thme">
-                            @Html.Partial("_Lecture", Session["themes"])
-                        </optgroup>
-                    </select>
+                        <select class="form-control" id="theme">
+                            <optgroup label="Themes" id="thme">
+                                @Html.Partial("_Lecture", Session["themes"])
+                            </optgroup>
+                        </select>
+                    </div>
 
                     <span id="quest" class="sp"><p> &#8250;</p></span>
                     </br>
@@ -71,15 +68,25 @@
             </div>
 
             <div class="col-md-10 col-sm-10 col-xs-10" style="padding:0;">
-                <div class="row" style="height:200px; background-color:#e26942;">
+                <div class="row">
+                    <nav class="navbar my_nav">
+                        <!-- Navbar content -->
+                        <img src="~/Content/Photos/Logo.png" class="logo" />
+                        <div>
+                            @Session["prof"]
+                        </div>
+                    </nav>
+                </div>
+                <div class="row" style="height:200px; background-color:navajowhite;">
                     <div class="porc" id="por">
 
-                        @Html.Partial("_question", Session["date"])
+                        @Html.Partial("_question")
+                        @*, Session["date"])*@
 
                     </div>
                     <!---->
                     @*<div id="piechart" style="float:left;"></div>
-                        <div id="piechart1" style="float:left;"></div>*@
+            <div id="piechart1" style="float:left;"></div>*@
 
                 </div>
 
@@ -117,6 +124,11 @@
 
 
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+    @*<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>*@
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.3/js/bootstrap-select.min.js"></script>
+
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Content/myJS/script.js"></script>
 

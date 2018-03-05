@@ -7,17 +7,15 @@
                 <th>Questions</th>               
             </tr>
         </thead>
-        <tbody>
-            
-                @foreach (var item in Model)
+        <tbody>         
+            @if (Model != null)
+            {
+                foreach (var item in Model)
                 {
-                    <tr>
-                      @*  <th>@item.Themes </th>*@
+                    <tr>                      
                         <td>@item</td>
                     </tr>
                 }
-
-                    
-            <tr></tr>
+            }
         </tbody>
     </table>

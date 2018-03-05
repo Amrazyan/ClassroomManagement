@@ -5,8 +5,7 @@
 
 body {
     background-color: #f2f0f0;
-    font-family: "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
-    
+    font-family: Verdana;
 }
 
 h5 {
@@ -40,6 +39,9 @@ h5 {
     border-bottom-style: solid;
     border-bottom-color: #000;
     margin: 0;
+    padding-left: -15px;
+    opacity:0,5;
+    background: linear-gradient(80deg, #034cf7,#012e5d);
 }
 
     .my_nav div {
@@ -48,6 +50,7 @@ h5 {
         float: right;
         line-height: 50px;
         height: 50px;
+
     }
 
 .shadow {
@@ -62,6 +65,7 @@ h5 {
     top: 0;
     /* right: 0; */
     background-color: #292625;
+    background: linear-gradient(80deg, #034cf7,#012e5d);
     overflow-y: auto;
 }
 
@@ -71,7 +75,6 @@ h5 {
         cursor: pointer;
         width: 20px;
         height: 30px;
-        background-color: #383533;
         position: absolute;
         right: 0;
         text-align: center;
@@ -93,6 +96,25 @@ h5 {
     margin: 7px;
     height: 25px;
 }
+.drops {
+    display:inline-block;
+}
+#lect, #theme {
+    height: 20px;
+    padding: 0;
+    width:100%;
+    font-size: 15px;
+    float: left;
+    /*background-color: black;*/
+    border: none;
+    outline: 0;
+    cursor: pointer;
+    color: aliceblue;
+    background: linear-gradient(50deg, #012e5d, #034cf7);
+}
+#lect, #theme {
+    background-color: black;
+}
 
 .my_badge {
     font-size: 5px;
@@ -110,13 +132,13 @@ h5 {
 
     .pad div {
         width: 100%;
-        padding: 8px 0px 8px 20px;
+        padding: 0px 0px 0px 10px;
         color: #f2f0f0;
     }
 
         .pad div:hover {
-            border-left: #e26942 solid 2px;
-            background-color: #383533;
+            border-left: #3098e2 solid 2px;
+            background: linear-gradient(80deg, #022142,#012e5d);
             cursor: pointer;
         }
 
@@ -172,10 +194,11 @@ p {
     height: 100%;
     width: 0;
     position: fixed;
-    z-index: 1;
+    z-index: 10001;
     top: 0;
     background-color: #111;
     overflow-y: auto;
     transition: 0.2s;
+    background: linear-gradient(80deg, #022142,#012e5d);
     padding: 0px 0px 0px 0px;
 }

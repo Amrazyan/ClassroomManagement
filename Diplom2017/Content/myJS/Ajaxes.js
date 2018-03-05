@@ -2,7 +2,7 @@
 $(document).ready(function () {
 
     $('#lect').change(function () {
-        alert(this.value);
+       
         $.ajax({
             url: '/Admin/_updtTheme',
             type: "POST",
@@ -14,6 +14,7 @@ $(document).ready(function () {
 
             success: function (data) {
                 $('#thme').html(data);
+              
             },
             error: function () {
                 alert("ERROR");
@@ -22,7 +23,6 @@ $(document).ready(function () {
     });
 
     $('#theme').change(function () {
-        alert(this.value);
         $.ajax({
             url: '/Admin/UpdteQuestions',
             type: "POST",

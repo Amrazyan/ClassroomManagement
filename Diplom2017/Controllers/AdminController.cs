@@ -17,8 +17,8 @@ namespace Diplom2017.Controllers
         public ActionResult Index()
         {
             
-            string email = "palyan@gmail.com";
-            string password = "palyan";
+            string email = "kristina@gmail.com";
+            string password = "kristina";
 
             List<FilterQuestions> quens = null;
             List<Lectures> lections = null;
@@ -30,7 +30,7 @@ namespace Diplom2017.Controllers
                 if (db.Proffesors.ToList().Exists(prof => prof.Email == email && prof.Password == password))
                 {
                     var prof = db.Proffesors.Single(p => p.Email == email);
-
+                    Session["prof"] = prof.Name + " " + prof.Surname;
                         quens = (from quest in db.AllQuestions
                                     join theme in db.Themes
                                     on quest.Theme_id equals theme.id
@@ -58,7 +58,7 @@ namespace Diplom2017.Controllers
 
             Session["lections"] = lections;
             Session["themes"] = themes;
-            Session["date"] = quens;
+            //Session["date"] = null;
 
             return RedirectToAction("DayStatic");   
         }
@@ -87,6 +87,15 @@ namespace Diplom2017.Controllers
 
             return PartialView("_question",data);
         }
+        public ActionResult UpdteQuestions()
+        {
+            //Updating questions with Ajax
+            //////////////////////////////
+
+
+
+            return View();
+        }
         [HttpPost]
         public ActionResult _updtTheme(string index)
         {
@@ -105,7 +114,10 @@ namespace Diplom2017.Controllers
 
                           select new Themes { _Themes = theme.Lect_themes, id = theme.id }).ToList();
             }
-
+            Session["themes"] = themes;
+            string indxx = (themes.First(x => x.id == x.id)).id.ToString();
+            //RedirectToAction()
+            RedirectToAction("UpdteQuestions", "Admin", indxx);
             return PartialView("_Lecture", themes);
         }
 
