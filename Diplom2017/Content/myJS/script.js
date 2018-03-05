@@ -7,7 +7,7 @@ var b = document.getElementById("por");
 a.addEventListener("click", openn);
 
 function openn() {
-    b.style.width = "500px";
+    b.style.width = "400px";
     a.style.webkitTransform = 'rotate(180deg)';
     a.style.transition = '0.2s';
     a.removeEventListener("click", openn);

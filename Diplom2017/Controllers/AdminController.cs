@@ -14,11 +14,12 @@ namespace Diplom2017.Controllers
     {
 
         // GET: Admin
-        public ActionResult Index()
+        [HttpPost]
+        public ActionResult Index(string email, string password)
         {
             
-            string email = "kristina@gmail.com";
-            string password = "kristina";
+            //string email = "kristina@gmail.com";
+            //string password = "kristina";
 
             List<FilterQuestions> quens = null;
             List<Lectures> lections = null;
@@ -29,6 +30,7 @@ namespace Diplom2017.Controllers
 
                 if (db.Proffesors.ToList().Exists(prof => prof.Email == email && prof.Password == password))
                 {
+
                     var prof = db.Proffesors.Single(p => p.Email == email);
                     Session["prof"] = prof.Name + " " + prof.Surname;
                         quens = (from quest in db.AllQuestions
@@ -53,14 +55,21 @@ namespace Diplom2017.Controllers
                               where lecture.Proffesor_Id == prof.Id && theme.Lesson_id == lecture.Id
 
                               select new Themes{ _Themes = theme.Lect_themes,id = theme.id }).ToList();
+
+                    Session["lections"] = lections;
+                    Session["themes"] = themes;
+                    //Session["date"] = null;
+
+                    return RedirectToAction("DayStatic");
+
+                }
+                else
+                {
+                    ModelState.AddModelError("Error", "Wrong login or password");
                 }
             }//Calling Dispose method
-
-            Session["lections"] = lections;
-            Session["themes"] = themes;
-            //Session["date"] = null;
-
-            return RedirectToAction("DayStatic");   
+            
+            return View("LoginProf");   
         }
 
         [HttpPost]
@@ -122,6 +131,10 @@ namespace Diplom2017.Controllers
         }
 
 
+        public ActionResult LoginProf()
+        {
+            return View();
+        }
         public ActionResult Statistics()
         {
             return View();

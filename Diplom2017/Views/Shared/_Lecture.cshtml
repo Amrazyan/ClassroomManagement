@@ -1,5 +1,7 @@
-﻿@foreach (var item in Model)
-{
-    <option value="" selected disabled hidden>Choose...</option>
-    <option value="@item.id" >@item</option>
+﻿@if (Model != null) {
+    foreach (var item in Model)
+    {
+        <option value="" selected disabled hidden>Choose...</option>
+        <option value="@item.id" >@item</option>
+    }
 }

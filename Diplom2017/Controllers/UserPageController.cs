@@ -16,9 +16,9 @@ namespace Diplom2017.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(string name, string password)
+        public ActionResult Index(string email, string password)
         {
-            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
                 ModelState.AddModelError("Error", "Wrong name or password");
             }
