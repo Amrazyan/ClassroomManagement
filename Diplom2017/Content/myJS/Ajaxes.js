@@ -1,6 +1,7 @@
 ﻿
 $(document).ready(function () {
 
+     //Updating Themes
     $('#lect').change(function () {
        
         $.ajax({
@@ -21,7 +22,7 @@ $(document).ready(function () {
             }
         });
     });
-
+    //Updating questions
     $('#theme').change(function () {
         $.ajax({
             url: '/Admin/UpdteQuestions',
@@ -41,6 +42,23 @@ $(document).ready(function () {
         });
     });
     
-    
+   function Myfunc () {
+
+                $.ajax({
+                    url: '/Admin/OnlineUsers',
+                    type: "GET",
+                  // data: JSON.stringify({ 'name': 'From user2' }),
+                    contentType: "application/json",
+                    dataType: "html",
+
+                    success: function (data) {
+                         $('.pad').append(data);
+                    },
+                    error: function () {
+                        alert("ERROR");
+                    }
+                });
+    };
+    setInterval( Myfunc, 3000);
 
 });

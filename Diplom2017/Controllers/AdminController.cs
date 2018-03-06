@@ -13,7 +13,7 @@ namespace Diplom2017.Controllers
     public class AdminController : Controller
     {
 
-        // GET: Admin
+        // POST: Admin
         [HttpPost]
         public ActionResult Index(string email, string password)
         {
@@ -72,6 +72,11 @@ namespace Diplom2017.Controllers
             return View("LoginProf");   
         }
 
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult UpdteQuestions(string index)
         {
@@ -96,15 +101,7 @@ namespace Diplom2017.Controllers
 
             return PartialView("_question",data);
         }
-        public ActionResult UpdteQuestions()
-        {
-            //Updating questions with Ajax
-            //////////////////////////////
-
-
-
-            return View();
-        }
+        
         [HttpPost]
         public ActionResult _updtTheme(string index)
         {
@@ -125,8 +122,7 @@ namespace Diplom2017.Controllers
             }
             Session["themes"] = themes;
             string indxx = (themes.First(x => x.id == x.id)).id.ToString();
-            //RedirectToAction()
-            RedirectToAction("UpdteQuestions", "Admin", indxx);
+            
             return PartialView("_Lecture", themes);
         }
 

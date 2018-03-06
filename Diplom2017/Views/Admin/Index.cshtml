@@ -29,19 +29,29 @@
     <title>Document</title>
 </head>
 <body>
-    
+
     <div class="container-fluent">
         <div class="row" style="width:100%;">
             <div class="col-md-2 col-sm-2 col-xs-2">
                 <div class="sidenav" id="leftNav" style="left:0;">
-                    <div class="drops" >
-                        <select class="form-control" id="lect">
+
+                    <div class="politech">
+                        <h4> P</h4><h5>olitechnic</h5>
+                    
+                    </div>
+
+                    <div class="drops">
+                        <select class="form-control" data-live-search="true" id="lect">
                             <optgroup label="Lectures">
                                 @Html.Partial("_Lecture", Session["lections"])
                             </optgroup>
                         </select>
+                        @*<ul class="dropdown-menu">
+                            <li><a href="#">Dropdown link</a></li>
+                            <li><a href="#">Dropdown link</a></li>
+                        </ul>*@
 
-                        <select class="form-control" id="theme">
+                        <select class="form-control" data-live-search="true" id="theme">
                             <optgroup label="Themes" id="thme">
                                 @Html.Partial("_Lecture", Session["themes"])
                             </optgroup>
@@ -64,22 +74,27 @@
                 <div class="row">
                     <nav class="navbar my_nav">
                         <!-- Navbar content -->
-                        <img src="~/Content/Photos/Logo.png" class="logo" />
-                        <div>
-                            @Session["prof"]
+                        @*<img src="~/Content/Photos/Logo.png" class="logo" />*@
+                        
+                        <div class="inner-addon left-addon" style="float:left">
+                            <i class="glyphicon glyphicon-search"></i>
+                            <input type="text" placeholder="Search" class="form-control" />
                         </div>
+                      
+                        <span>
+                            @Session["prof"]
+                        </span>
                     </nav>
                 </div>
                 <div class="row" style="height:200px; background-color:navajowhite;">
                     <div class="porc" id="por">
 
                         @Html.Partial("_question")
-                        @*, Session["date"])*@
-
+                       
                     </div>
                     <!---->
                     @*<div id="piechart" style="float:left;"></div>
-            <div id="piechart1" style="float:left;"></div>*@
+                        <div id="piechart1" style="float:left;"></div>*@
 
                 </div>
 
@@ -91,32 +106,12 @@
     </div>
     <script type="text/javascript">
         $(document).ready(function () {
-            //$("#test").click(function () {
-
-            //    $.ajax({
-            //        url: '/Admin/OnlineUsers',
-            //        type: "GET",
-            //      // data: JSON.stringify({ 'name': 'From user2' }),
-            //        contentType: "application/json",
-            //        dataType: "html",
-
-            //        success: function (data) {
-            //             $('.pad').append(data);
-            //        },
-            //        error: function () {
-            //            alert("ERROR");
-            //        }
-            //    });
-            //}
-            //);
+            
 
 
         });
     </script>
-    <script type="text/javascript">
 
-
-    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
     @*<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>*@
@@ -124,7 +119,5 @@
 
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Content/myJS/script.js"></script>
-
-
 </body>
 </html>
