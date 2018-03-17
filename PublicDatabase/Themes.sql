@@ -1,0 +1,19 @@
+﻿CREATE TABLE [dbo].[Themes](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[Lect_themes] [nvarchar](200) NOT NULL,
+	[Lesson_id] [int] NOT NULL,
+ CONSTRAINT [PK_Subjects] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[Themes]  WITH CHECK ADD  CONSTRAINT [FK_Subjects_Lesson1] FOREIGN KEY([Lesson_id])
+REFERENCES [dbo].[Lesson] ([Id])
+GO
+
+ALTER TABLE [dbo].[Themes] CHECK CONSTRAINT [FK_Subjects_Lesson1]
+GO
+

@@ -1,0 +1,12 @@
+{
+                          CPU: 'Intel',
+                          Drives: [
+                            'DVD read/writer',
+                            '500 gigabyte hard drive'
+                          ]
+                        }
+{
+                          Subject: 'Intel',
+                          Quests: 'DVD read/writer'
+                        }
+{ "Subject": "Intel","Quests": "DVD read/writer}

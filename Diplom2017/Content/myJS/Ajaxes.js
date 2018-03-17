@@ -58,7 +58,8 @@ $(document).ready(function () {
                         alert("ERROR");
                     }
                 });
-    };
-    setInterval( Myfunc, 3000);
+    };//    online  users
+
+    //setInterval( Myfunc, 3000);
 
 });

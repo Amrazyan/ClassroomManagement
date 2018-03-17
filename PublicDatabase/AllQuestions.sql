@@ -1,0 +1,18 @@
+﻿CREATE TABLE [dbo].[AllQuestions](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Theme_id] [int] NOT NULL,
+	[Question] [text] NULL,
+ CONSTRAINT [PK_AllQuestions] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[AllQuestions]  WITH CHECK ADD  CONSTRAINT [FK_AllQuestions_Subjects] FOREIGN KEY([Theme_id])
+REFERENCES [dbo].[Themes] ([id])
+GO
+
+ALTER TABLE [dbo].[AllQuestions] CHECK CONSTRAINT [FK_AllQuestions_Subjects]
+GO

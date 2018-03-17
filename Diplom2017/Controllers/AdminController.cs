@@ -123,7 +123,7 @@ namespace Diplom2017.Controllers
             Session["themes"] = themes;
             string indxx = (themes.First(x => x.id == x.id)).id.ToString();
             
-            return PartialView("_Lecture", themes);
+            return PartialView("_DropDowns", themes);
         }
 
 
@@ -142,6 +142,7 @@ namespace Diplom2017.Controllers
 
         public ActionResult OnlineUsers()
         {
+            
              string[] text = System.IO.File.ReadAllLines(@"F:\Git\LessonManagement\Diplom2017\Content\Online\WriteText.txt");
             
             string hyp="";

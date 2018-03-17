@@ -43,7 +43,7 @@
                     <div class="drops">
                         <select class="form-control" data-live-search="true" id="lect">
                             <optgroup label="Lectures">
-                                @Html.Partial("_Lecture", Session["lections"])
+                                @Html.Partial("_DropDowns", Session["lections"])
                             </optgroup>
                         </select>
                         @*<ul class="dropdown-menu">
@@ -53,7 +53,7 @@
 
                         <select class="form-control" data-live-search="true" id="theme">
                             <optgroup label="Themes" id="thme">
-                                @Html.Partial("_Lecture", Session["themes"])
+                                @Html.Partial("_DropDowns", Session["themes"])
                             </optgroup>
                         </select>
                     </div>
@@ -89,7 +89,7 @@
                 <div class="row" style="height:200px; background-color:navajowhite;">
                     <div class="porc" id="por">
 
-                        @Html.Partial("_question")
+                        @Html.Partial("_question") 
                        
                     </div>
                     <!---->

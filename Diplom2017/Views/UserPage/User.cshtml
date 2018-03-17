@@ -36,10 +36,13 @@
 
                         </div>
                         <div class="form-group">
-                            <button type="button"  id="sbmit" class="btn btn-submit" >CLICK</button>
-                            @*<button type="submit"  class="btn btn-submit" style="float:right"> Submit </button>*@
+                            <button type="button" id="sbmit" class="btn btn-submit">CLICK</button>
+                            <button type="button" id="js" class="btn btn-submit" style="float:right"> Create Json </button>
+                            <button type="button" id="rjs" class="btn btn-submit" style="float:right"> Read Json </button>
                         </div>
                     </form>
+                    <div id="mydiv"></div>
+                    <h1 id="h"></h1>
                 </div>
             </div>
         </div>
@@ -66,6 +69,53 @@
                     },
                     error: function () {
                         alert("ERROR");
+                    }
+                });
+            }   /// LOGGED STUDENTS DEMO
+            );
+            $("#js").click(function () {
+
+                $.ajax({
+                    url: '/UserPage/CreateJson',
+                    type: "GET",
+
+                    //data: JSON.stringify({ 'name': 'From user2' }),
+
+                    contentType: "application/json",
+                    dataType: "html",
+
+                    success: function () {
+                        // $('#badge').append(data);
+                        alert(1);
+                    },
+                    error: function () {
+                        alert("ERROR");
+                    }
+                });
+            }   /// LOGGED STUDENTS DEMO
+            );
+            $("#rjs").click(function () {
+
+                $.ajax({
+                    url: '/UserPage/ReadJson',
+                    type: "POST",
+
+                    //data: JSON.stringify({ 'name': 'From user2' }),
+
+                    contentType: "application/json",
+                    dataType: "html",
+
+                    success: function (data) {
+                        var dat = JSON.parse(data);
+                        alert(dat);
+                        $('#mydiv').append(dat);
+                        document.getElementById("h").innerHTML = myObj.Subject;
+
+                        //document.getElementById("mydiv").innerHTML = dat.Subject;
+                        
+                    },
+                    error: function (e) {
+                        alert(e + "ERROR");
                     }
                 });
             }   /// LOGGED STUDENTS DEMO
