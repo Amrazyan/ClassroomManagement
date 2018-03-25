@@ -8,6 +8,11 @@ namespace Diplom2017.Models
     public class QuestAnswers
     {
         public string Subject { get; set; }
-        public List<string> Questions { get; set; }
+        public string Questions { get; set; }
+
+        public override string ToString()
+        {
+            return Questions + "";
+        }
     }
 }

@@ -6,8 +6,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Services;
+using System.IO;
+using Newtonsoft.Json;
 
-namespace Diplom2017.Controllers
+namespace Diplom2017
 {
     
     public class AdminController : Controller
@@ -17,9 +19,11 @@ namespace Diplom2017.Controllers
         [HttpPost]
         public ActionResult Index(string email, string password)
         {
-            
+
             //string email = "kristina@gmail.com";
             //string password = "kristina";
+
+            stClass.myring = "From admin";
 
             List<FilterQuestions> quens = null;
             List<Lectures> lections = null;
@@ -71,7 +75,7 @@ namespace Diplom2017.Controllers
             
             return View("LoginProf");   
         }
-
+       // [HttpPost] /////////////////////////////////////////////////////
         public ActionResult Index()
         {
             return View();
@@ -88,12 +92,13 @@ namespace Diplom2017.Controllers
 
             using (DiplomeEntities db = new DiplomeEntities())
             {
-             
+
                 data = (from quest in db.AllQuestions
                         join theme in db.Themes
                         on quest.Theme_id equals theme.id
                         where theme.id == indx
-                        select new FilterQuestions {                            
+                        select new FilterQuestions {
+                            Id = quest.Id,
                             Theme_Questions = quest.Question
                         }).ToList();
             }
@@ -155,6 +160,31 @@ namespace Diplom2017.Controllers
             }
             
             return Content(hyp);
+        }
+        [HttpPost]
+        public void CreateJson(string Id)/////////////////////////////////////////////////////////////////////////////////
+        {
+            int indx = Convert.ToInt32(Id);
+
+            List<QuestAnswers> data = null;
+            using (DiplomeEntities db = new DiplomeEntities())
+            {
+
+                data = (from quest in db.AllQuestions
+                       join answ in db.AllAnswers
+                       on quest.Id equals answ.AllQuest_Id
+                       where quest.Id == indx
+                      
+                       select new QuestAnswers
+                       {
+                           Subject = quest.Question,
+                           Questions = answ.Answers,
+                       }).ToList();
+            }
+         
+
+            Session["myquestions"] = data;           
+
         }
     }
 }

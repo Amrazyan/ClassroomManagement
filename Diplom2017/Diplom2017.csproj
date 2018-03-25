@@ -187,6 +187,7 @@
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\QuestAnswers.cs" />
+    <Compile Include="Models\stClass.cs" />
     <Compile Include="Models\Themes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="App_Data\Student.cs">

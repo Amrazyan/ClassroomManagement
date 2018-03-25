@@ -16,7 +16,7 @@ namespace Diplom2017
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Admin", action = "Statistics", id = UrlParameter.Optional }
+                defaults: new { controller = "Admin", action = "LoginProf", id = UrlParameter.Optional }
             );
         }
     }

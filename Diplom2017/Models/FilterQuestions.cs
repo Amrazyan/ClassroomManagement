@@ -10,6 +10,7 @@ namespace Diplom2017.Models
         //public string Themes { get; set; }
         //public List<string> ThemeQuestions { get; set; }
         public string Theme_Questions { get; set; }
+        public int Id { get; set; }
         public override string ToString()
         {
             return Theme_Questions + "";

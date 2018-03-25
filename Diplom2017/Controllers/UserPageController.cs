@@ -7,8 +7,9 @@ using System.IO;
 using Diplom2017.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Diplom2017.App_Data;
 
-namespace Diplom2017.Controllers
+namespace Diplom2017
 {
     public class UserPageController : Controller
     {
@@ -34,7 +35,9 @@ namespace Diplom2017.Controllers
             return View();
         }
         public ActionResult User()
+
         {
+            
             return View();
         }
         public void Answers(int userAnswer, int rightAnswer)
@@ -71,39 +74,44 @@ namespace Diplom2017.Controllers
         public void Online(string name)
         {
            
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"F:\Git\LessonManagement\Diplom2017\Content\Online\WriteText.txt", true))
+            using (StreamWriter file = new StreamWriter(@"F:\Git\LessonManagement\Diplom2017\Content\Online\WriteText.txt", true))
             {
                 file.WriteLine(name);
             }
 
         }
-        public JsonResult ReadJson()
-        {            
-            string data;
-            using (StreamReader r = new StreamReader(@"F:\Git\LessonManagement\Diplom2017\Content\Online\MyJSON1.json"))
-            {
-                data = r.ReadToEnd();
-            }
-            //return PartialView("_userQuestions", data);
-            return Json(data);
+        [HttpPost]
+        public ActionResult ReadJson()
+        {
+
+            //List<QuestAnswers> data = null;
+            //using (DiplomeEntities db = new DiplomeEntities())
+            //{
+
+            //    data = (from quest in db.AllQuestions
+            //            join answ in db.AllAnswers
+            //            on quest.Id equals answ.AllQuest_Id
+            //            where quest.Id == 2
+
+            //            select new QuestAnswers
+            //            {
+            //                Subject = quest.Question,
+            //                Questions = answ.Answers,
+            //            }).ToList();
+            //}
+           
+
+            //Session["myquestions"] = data;
+
+            return PartialView("_userQuestions", Session["myquestions"]);
+
         }
         public void CreateJson()
         {
-            //JObject videogameRatings = new JObject(
-            //             new JProperty("Subject", 9),                        
-            //             new JProperty("Call of Duty", 7.5)
-            //             );
+            Session["my"] = stClass.myring;
+            string json = " { \"Subject\":  \"Intel\" ,\"Quests\": [\"DVD read/writer\", \"DVD read/writer\",\"DVD read/writer\"]} ";
 
-            //System.IO.File.WriteAllText(@"F:\Git\LessonManagement\Diplom2017\Content\Online\WriteJSON.json", videogameRatings.ToString());
-
-            //using (StreamWriter file = System.IO.File.CreateText(@"F:\Git\LessonManagement\Diplom2017\Content\Online\WriteJSON.json"))
-            //using (JsonTextWriter writer = new JsonTextWriter(file))
-            //{
-            //    videogameRatings.WriteTo(writer);
-            //}
-            string json = " '{ \"Subject\": \"Intel\",\"Quests\": \"DVD read/writer\"}' ";
-                        
-            using (StreamWriter file = new StreamWriter(@"F:\Git\LessonManagement\Diplom2017\Content\Online\MyJSON1.json", true))
+            using (StreamWriter file = new StreamWriter(@"F:\Git\LessonManagement\Diplom2017\Content\Online\MyJSON3.json", true))
             {
                 file.WriteLine(json);
             }

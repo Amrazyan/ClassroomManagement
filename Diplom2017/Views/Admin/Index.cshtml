@@ -26,7 +26,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Politechnic</title>
 </head>
 <body>
 
@@ -116,6 +116,33 @@
 
     @*<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>*@
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.3/js/bootstrap-select.min.js"></script>
+
+    <script>
+
+        function Create (o) {
+
+            alert(o.id);
+            $.ajax({
+                url: '/Admin/CreateJson',
+                type: "POST",
+
+
+                data: JSON.stringify({ 'Id': o.id }),
+                contentType: "application/json",
+               // dataType: "html",
+
+                success: function () {
+                    // $('#badge').append(data);
+                    alert(1);
+                },
+                error: function (e) {
+                    alert(e.message);
+                }
+            });
+        }   /// LOGGED STUDENTS DEMO
+        
+
+    </script>
 
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Content/myJS/script.js"></script>

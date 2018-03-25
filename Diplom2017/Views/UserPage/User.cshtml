@@ -8,14 +8,14 @@
 <head>
 
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/css/style.css" rel="stylesheet" />
+    <link href="~/Content/css/mycss.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-1.10.2.js"></script>
     <script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.js" type="text/javascript"></script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Poltechnic</title>
 </head>
 <body>
 
@@ -25,24 +25,29 @@
             <div class="col-md-6 col-md-offset-3 col-sm-4 col-sm-offset-4 shadow">
                 <div style="padding-top:6%; padding-bottom:16%">
                     <form action="" id="selected">
-                        <div class="form-group">
-                            @for (int i = 0; i < 4; i++)
-                            {
-                                <label>  <input type="radio" name="rad"> Lorem ipssectetur, adipisicing elit. Impedit laudantium amet  </label> <br><br>
-                            }                                                        
+                        <h1>@Session["my"]</h1>
+
+                        <h1 id="h"> @*Subjects*@</h1>
+
+                        <div id="mydiv" class="form-group">
+
+                            @*@Html.Partial("_userQuestions", Session["myquestions"])*@
+                            @*//Questions*@
                         </div>
+
                         <hr>
                         <div id="usr">
 
                         </div>
                         <div class="form-group">
                             <button type="button" id="sbmit" class="btn btn-submit">CLICK</button>
-                            <button type="button" id="js" class="btn btn-submit" style="float:right"> Create Json </button>
-                            <button type="button" id="rjs" class="btn btn-submit" style="float:right"> Read Json </button>
+                            <button type="button" id="create" class="btn btn-submit" style="float:right"> Create Json </button>
+                            <button type="button" id="read" class="btn btn-submit" style="float:right"> Read Json </button>
                         </div>
                     </form>
-                    <div id="mydiv"></div>
-                    <h1 id="h"></h1>
+                    
+                    
+                    <h2 id="h2"></h2>
                 </div>
             </div>
         </div>
@@ -73,7 +78,7 @@
                 });
             }   /// LOGGED STUDENTS DEMO
             );
-            $("#js").click(function () {
+            $("#create").click(function () {
 
                 $.ajax({
                     url: '/UserPage/CreateJson',
@@ -94,29 +99,25 @@
                 });
             }   /// LOGGED STUDENTS DEMO
             );
-            $("#rjs").click(function () {
+            $("#read").click(function () {
 
-                $.ajax({
-                    url: '/UserPage/ReadJson',
-                    type: "POST",
+                alert("Reading");
 
-                    //data: JSON.stringify({ 'name': 'From user2' }),
+                $.ajax({                    
+                        url: '/UserPage/ReadJson',
+                        type: "POST",
 
-                    contentType: "application/json",
-                    dataType: "html",
-
-                    success: function (data) {
-                        var dat = JSON.parse(data);
-                        alert(dat);
-                        $('#mydiv').append(dat);
-                        document.getElementById("h").innerHTML = myObj.Subject;
-
-                        //document.getElementById("mydiv").innerHTML = dat.Subject;
+                        contentType: "application/json",
+                        dataType: "html",
                         
-                    },
-                    error: function (e) {
-                        alert(e + "ERROR");
-                    }
+                        success: function (data) {
+                            alert("success");
+
+                            $('#mydiv').html(data);
+                        },
+                        error: function () {
+                            alert("ERROR");
+                        }                    
                 });
             }   /// LOGGED STUDENTS DEMO
             );

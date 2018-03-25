@@ -1,8 +1,16 @@
 ﻿@if (Model != null)
 {
+
+    bool flag = true;
     foreach (var item in Model)
     {
+        if (flag)
+        {
+            <h1>@item.Subject</h1>
+            flag = false;
+        }
 
-        <th>@item</th>
+         <label><input type="radio" name="rad">@item </label><br><br>
     }
+
 }
