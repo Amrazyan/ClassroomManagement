@@ -171,19 +171,23 @@ namespace Diplom2017
             {
 
                 data = (from quest in db.AllQuestions
-                       join answ in db.AllAnswers
-                       on quest.Id equals answ.AllQuest_Id
-                       where quest.Id == indx
-                      
-                       select new QuestAnswers
-                       {
-                           Subject = quest.Question,
-                           Questions = answ.Answers,
-                       }).ToList();
-            }
-         
+                        join answ in db.AllAnswers
+                        on quest.Id equals answ.AllQuest_Id
+                        where quest.Id == indx
 
-            Session["myquestions"] = data;           
+                        select new QuestAnswers
+                        {
+                            Subject = quest.Question,
+                            Questions = answ.Answers,
+                        }).ToList();
+            }
+            string json = JsonConvert.SerializeObject(data);
+
+
+            using (StreamWriter file = new StreamWriter(@"F:\Git\LessonManagement\Diplom2017\Content\Online\MyJSON3.json", true))
+            {
+                file.WriteLine(json);
+            }
 
         }
     }

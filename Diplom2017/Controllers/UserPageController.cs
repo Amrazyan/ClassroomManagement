@@ -11,6 +11,7 @@ using Diplom2017.App_Data;
 
 namespace Diplom2017
 {
+
     public class UserPageController : Controller
     {
         // GET: UserPage
@@ -80,35 +81,47 @@ namespace Diplom2017
             }
 
         }
+        //[HttpPost]
+        //public ActionResult ReadJson()
+        //{
+
+        //    //List<QuestAnswers> data = null;
+        //    //using (DiplomeEntities db = new DiplomeEntities())
+        //    //{
+
+        //    //    data = (from quest in db.AllQuestions
+        //    //            join answ in db.AllAnswers
+        //    //            on quest.Id equals answ.AllQuest_Id
+        //    //            where quest.Id == 2
+
+        //    //            select new QuestAnswers
+        //    //            {
+        //    //                Subject = quest.Question,
+        //    //                Questions = answ.Answers,
+        //    //            }).ToList();
+        //    //}
+
+
+        //    //Session["myquestions"] = data;
+
+        //    return PartialView("_userQuestions", Session["myquestions"]);
+
+        //}
         [HttpPost]
         public ActionResult ReadJson()
         {
+            string data;
+            using (StreamReader r = new StreamReader(@"F:\Git\LessonManagement\Diplom2017\Content\Online\MyJSON3.json"))
+            {
+                data = r.ReadToEnd();
+            }
 
-            //List<QuestAnswers> data = null;
-            //using (DiplomeEntities db = new DiplomeEntities())
-            //{
-
-            //    data = (from quest in db.AllQuestions
-            //            join answ in db.AllAnswers
-            //            on quest.Id equals answ.AllQuest_Id
-            //            where quest.Id == 2
-
-            //            select new QuestAnswers
-            //            {
-            //                Subject = quest.Question,
-            //                Questions = answ.Answers,
-            //            }).ToList();
-            //}
-           
-
-            //Session["myquestions"] = data;
-
-            return PartialView("_userQuestions", Session["myquestions"]);
-
+            JArray json = JArray.Parse(data);
+            return PartialView("_userQuestions", json);
         }
+
         public void CreateJson()
         {
-            Session["my"] = stClass.myring;
             string json = " { \"Subject\":  \"Intel\" ,\"Quests\": [\"DVD read/writer\", \"DVD read/writer\",\"DVD read/writer\"]} ";
 
             using (StreamWriter file = new StreamWriter(@"F:\Git\LessonManagement\Diplom2017\Content\Online\MyJSON3.json", true))
