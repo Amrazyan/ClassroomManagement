@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
@@ -24,15 +23,17 @@
         <div class="row">
             <div class="col-md-6 col-md-offset-3 col-sm-4 col-sm-offset-4 shadow">
                 <div style="padding-top:6%; padding-bottom:16%">
-                    <form action="" id="selected">
+
+
+                    <form action="@Url.Action("Answers", "UserPage")" method="post" id="selected">
+
                         <h1>@Session["my"]</h1>
 
                         <h1 id="h"> @*Subjects*@</h1>
 
                         <div id="mydiv" class="form-group">
 
-                            @*@Html.Partial("_userQuestions", Session["myquestions"])*@
-                            @*//Questions*@
+                            <!--Quesitons-->
                         </div>
 
                         <hr>
@@ -40,46 +41,49 @@
 
                         </div>
                         <div class="form-group">
-                            <button type="button" id="sbmit" class="btn btn-submit">CLICK</button>
-                            <button type="button" id="create" class="btn btn-submit" style="float:right"> Create Json </button>
+                            <!--<button type="button" id="sbmit" class="btn btn-submit">CLICK</button>-->
+                            <!--<button type="button" id="create" class="btn btn-submit" style="float:right"> Create Json </button>-->
+
                             <button type="button" id="read" class="btn btn-submit" style="float:right"> Read Json </button>
+                            <button type="submit" id="sendAnswer"  class="btn btn-success" style="float:right"> Send </button>
                         </div>
                     </form>
-                    
-                    
+
+
                     <h2 id="h2"></h2>
                 </div>
             </div>
         </div>
     </div>
     <script src="bootstrap/js/bootstrap.js">
-        
+
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#sbmit").click(function () {
-                
-                $.ajax({
-                    url: '/UserPage/Online',
-                    type: "POST",
 
-                    data: JSON.stringify({ 'name': 'From user2' }),
+            //$("#sendAnswer").click(function () {
+            //    var val = document.querySelector('input[name="rad"]:checked').value;
 
-                    contentType: "application/json",
-                    dataType: "html",
+            //    $.ajax({
+            //        url: '/UserPage/Answers',
+            //        type: "POST",
 
-                    success: function (data) {
-                       // $('#badge').append(data);
-                        alert(data);
-                    },
-                    error: function () {
-                        alert("ERROR");
-                    }
-                });
-            }   /// LOGGED STUDENTS DEMO
-            );
+            //        data: JSON.stringify({ 'name': 'From user2' }),
 
+            //        contentType: "application/json",
+            //        dataType: "html",
 
+            //        success: function (data) {
+            //            alert(data);
+            //        },
+            //        error: function () {
+            //            alert("ERROR");
+            //        }
+            //    });
+
+            //});
+
+       
             $("#create").click(function () {
 
                 $.ajax({
@@ -104,20 +108,21 @@
 
             $("#read").click(function () {
 
+                alert("Reading");
+
                 $.ajax({
                     url: '/UserPage/ReadJson',
                     type: "POST",
 
-                    //data: JSON.stringify({ 'name': 'From user2' }),
-
                     contentType: "application/json",
                     dataType: "html",
 
-                    success: function (data) {                     
-                        $('#mydiv').append(data);                     
+                    success: function (data) {
+                        alert("success");
+                        $('#mydiv').html(data);
                     },
-                    error: function (e) {
-                        alert(e + "ERROR");
+                    error: function () {
+                        alert("ERROR");
                     }
                 });
             }   /// LOGGED STUDENTS DEMO
