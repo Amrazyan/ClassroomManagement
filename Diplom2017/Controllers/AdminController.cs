@@ -11,11 +11,10 @@ using Newtonsoft.Json;
 
 namespace Diplom2017
 {
-
+    
     public class AdminController : Controller
     {
 
-        #region Login
         // POST: Admin
         [HttpPost]
         public ActionResult Index(string email, string password)
@@ -24,6 +23,7 @@ namespace Diplom2017
             //string email = "kristina@gmail.com";
             //string password = "kristina";
 
+            stClass.myring = "From admin";
 
             List<FilterQuestions> quens = null;
             List<Lectures> lections = null;
@@ -37,28 +37,28 @@ namespace Diplom2017
 
                     var prof = db.Proffesors.Single(p => p.Email == email);
                     Session["prof"] = prof.Name + " " + prof.Surname;
-                    quens = (from quest in db.AllQuestions
-                             join theme in db.Themes
-                             on quest.Theme_id equals theme.id
-                             join lessn in db.Lessons
-                             on theme.Lesson_id equals lessn.Id
-                             where lessn.Id == prof.Id
+                        quens = (from quest in db.AllQuestions
+                                    join theme in db.Themes
+                                    on quest.Theme_id equals theme.id
+                                    join lessn in db.Lessons
+                                    on theme.Lesson_id equals lessn.Id                                   
+                                    where lessn.Id == prof.Id
 
-                             select new FilterQuestions
-                             {
-                                 Theme_Questions = quest.Question
-                             }).ToList();
+                                    select new FilterQuestions
+                                    {                                        
+                                        Theme_Questions = quest.Question
+                                    }).ToList();
 
                     lections = (from lecture in db.Lessons
-                                where lecture.Proffesor_Id == prof.Id
-                                select new Lectures { _Lectures = lecture.Lectures, id = lecture.Id }).ToList();
+                               where lecture.Proffesor_Id == prof.Id
+                               select new Lectures {_Lectures = lecture.Lectures, id = lecture.Id }).ToList();
 
                     themes = (from theme in db.Themes
                               join lecture in db.Lessons
                               on theme.Lesson_id equals lecture.Id
                               where lecture.Proffesor_Id == prof.Id && theme.Lesson_id == lecture.Id
 
-                              select new Themes { _Themes = theme.Lect_themes, id = theme.id }).ToList();
+                              select new Themes{ _Themes = theme.Lect_themes,id = theme.id }).ToList();
 
                     Session["lections"] = lections;
                     Session["themes"] = themes;
@@ -72,21 +72,15 @@ namespace Diplom2017
                     ModelState.AddModelError("Error", "Wrong login or password");
                 }
             }//Calling Dispose method
-
-            return View("LoginProf");
+            
+            return View("LoginProf");   
         }
-        #endregion
-
-
-
-        // [HttpPost] /////////////////////////////////////////////////////
+       // [HttpPost] /////////////////////////////////////////////////////
         public ActionResult Index()
         {
             return View();
         }
 
-
-        #region Admin DropDowns
         [HttpPost]
         public ActionResult UpdteQuestions(string index)
         {
@@ -103,17 +97,16 @@ namespace Diplom2017
                         join theme in db.Themes
                         on quest.Theme_id equals theme.id
                         where theme.id == indx
-                        select new FilterQuestions
-                        {
+                        select new FilterQuestions {
                             Id = quest.Id,
                             Theme_Questions = quest.Question
                         }).ToList();
             }
+           
 
-
-            return PartialView("_question", data);
+            return PartialView("_question",data);
         }
-
+        
         [HttpPost]
         public ActionResult _updtTheme(string index)
         {
@@ -134,10 +127,9 @@ namespace Diplom2017
             }
             Session["themes"] = themes;
             string indxx = (themes.First(x => x.id == x.id)).id.ToString();
-
+            
             return PartialView("_DropDowns", themes);
         }
-        #endregion
 
 
         public ActionResult LoginProf()
@@ -155,22 +147,20 @@ namespace Diplom2017
 
         public ActionResult OnlineUsers()
         {
-
-            string[] text = System.IO.File.ReadAllLines(@"F:\Git\LessonManagement\Diplom2017\Content\Online\WriteText.txt");
-
-            string hyp = "";
-            if (text != null)
-            {
+            
+             string[] text = System.IO.File.ReadAllLines(@"F:\Git\LessonManagement\Diplom2017\Content\Online\WriteText.txt");
+            
+            string hyp="";
+            if (text!= null)
+            {               
                 foreach (var it in text)
                 {
                     hyp += $"<div> {it} <i class=\"my_badge\">&nbsp;</i></div>";
                 }
             }
-
+            
             return Content(hyp);
         }
-
-
         [HttpPost]
         public void CreateJson(string Id)/////////////////////////////////////////////////////////////////////////////////
         {
@@ -189,49 +179,16 @@ namespace Diplom2017
                         {
                             Subject = quest.Question,
                             Questions = answ.Answers,
-                            RightId = answ.right_Answ_id
                         }).ToList();
             }
+            string json = JsonConvert.SerializeObject(data);
 
 
-            Session["myquestions"] = data;
-
-        }
-
-
-
-
-        public void Chart()
-        {
-            List<string> names = new List<string>();
-
-            //names.Add("Arman Amrazyan");
-            //names.Add("Hayk Altunyan");
-            //names.Add("Nikos Nikolayidis");
-
-            List<int> numbers = new List<int>();
-
-            //numbers.Add(50);
-            //numbers.Add(150);
-            //numbers.Add(10);
-            int count = 0;
-          
-
-            List<UserAnswers> userData = Session["userData"] as List<UserAnswers>;
-
-            foreach (UserAnswers item in userData.FindAll(e => e.Answer == 1))
+            using (StreamWriter file = new StreamWriter(@"F:\Git\LessonManagement\Diplom2017\Content\Online\MyJSON3.json", true))
             {
-                names.Add(item.UserName);
-                count++;                
+                file.WriteLine(json);
             }
-            numbers.Add(count);
-
-            Session["numberList"] = numbers;
-            Session["nameList"] = names;
 
         }
-
-
-
     }
 }
