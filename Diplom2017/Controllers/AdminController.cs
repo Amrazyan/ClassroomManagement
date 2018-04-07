@@ -195,10 +195,7 @@ namespace Diplom2017
 
 
             Session["myquestions"] = data;
-            using (StreamWriter file = new StreamWriter(@"F:\Git\LessonManagement\Diplom2017\Content\Online\MyJSON3.json", true))
-            {
-                file.WriteLine(json);
-            }
+           
 
         }
 

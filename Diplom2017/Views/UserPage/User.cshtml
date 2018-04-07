@@ -61,50 +61,9 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-            //$("#sendAnswer").click(function () {
-            //    var val = document.querySelector('input[name="rad"]:checked').value;
-
-            //    $.ajax({
-            //        url: '/UserPage/Answers',
-            //        type: "POST",
-
-            //        data: JSON.stringify({ 'name': 'From user2' }),
-
-            //        contentType: "application/json",
-            //        dataType: "html",
-
-            //        success: function (data) {
-            //            alert(data);
-            //        },
-            //        error: function () {
-            //            alert("ERROR");
-            //        }
-            //    });
-
-            //});
-
+           
        
-            $("#create").click(function () {
-
-                $.ajax({
-                    url: '/UserPage/CreateJson',
-                    type: "GET",
-
-                    //data: JSON.stringify({ 'name': 'From user2' }),
-
-                    contentType: "application/json",
-                    dataType: "html",
-
-                    success: function () {
-                        // $('#badge').append(data);
-                        alert(1);
-                    },
-                    error: function () {
-                        alert("ERROR");
-                    }
-                });
-            }   /// LOGGED STUDENTS DEMO
-            );
+           
 
             $("#read").click(function () {
 
@@ -125,31 +84,9 @@
                         alert("ERROR");
                     }
                 });
-            }   /// LOGGED STUDENTS DEMO
-            );
+            });
 
-            //$("#read").click(function () {
-
-            //    alert("Reading");
-
-            //    $.ajax({                    
-            //            url: '/UserPage/ReadJson',
-            //            type: "POST",
-
-            //            contentType: "application/json",
-            //            dataType: "html",
-                        
-            //            success: function (data) {
-            //                alert("success");
-            //                alert(data);
-            //                $('#mydiv').html(data);
-            //            },
-            //            error: function () {
-            //                alert("ERROR");
-            //            }                    
-            //    });
-            //}   /// LOGGED STUDENTS DEMO
-            //);
+           
 
         });
     </script>

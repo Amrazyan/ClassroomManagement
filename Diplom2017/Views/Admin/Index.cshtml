@@ -137,48 +137,16 @@
                         alert("ERROR");
                     }
                 });
-            }   /// LOGGED STUDENTS DEMO
-            );
-
-            //google.charts.load('current', { 'packages': ['corechart'] });
-            //google.charts.setOnLoadCallback(drawChart);
-
-            //function drawChart() {
-            //    var data = google.visualization.arrayToDataTable([
-            //        ['Task', 'Hours per Day'],
-            //        ['', 0],
-            //        ['Wrong answer', 20],
-            //        ['Always right', 10],
-            //        ['Arman Amrazyan, Hayk Altunyan, Arman Hovhannisyan, Nikolay Nikolayidis, Sona Gyulamiryan', 30],
-
-            //    ]);
-            //    var options = {
-            //        is3D: true,
-            //        'backgroundColor': 'transparent',
-            //        legend: 'none'
-            //    };
-            //    var a = new google.visualization.PieChart(document.getElementById('piechart'));
-            //    a.draw(data, options);
-            //    var b = new google.visualization.PieChart(document.getElementById('piechart1'));
-            //    b.draw(data, options);
-
-            // }
-
+            });
+        
             $("#showChart").click(function () {
 
                 var chartId = document.getElementById("charts");
-
-             
-
-              
                 var names = @Html.Raw(Json.Encode(Session["nameList"]));
-                
                 var numbers = @Html.Raw(Json.Encode(Session["numberList"]));
-
 
                 alert(names);
                 alert(numbers);
-               
                
                 var myChart = new Chart(chartId, {
                     type: 'pie',
@@ -196,10 +164,6 @@
                     options: {
                         maintainAspectRatio: false,
                         legends: { display: false },
-                        
-
-                        //responsive: true,
-
                     }
                 });
 
