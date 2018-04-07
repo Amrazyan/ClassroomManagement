@@ -9,6 +9,7 @@ namespace Diplom2017.Models
     {
         public string Subject { get; set; }
         public string Questions { get; set; }
+        public int RightId { get; set; }
 
         public override string ToString()
         {

@@ -8,6 +8,7 @@ using Diplom2017.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Diplom2017.App_Data;
+using System.Data;
 
 namespace Diplom2017
 {
@@ -35,14 +36,47 @@ namespace Diplom2017
             return View();
         }
         public ActionResult User()
-
         {
-            
             return View();
         }
-        public void Answers(int userAnswer, int rightAnswer)
+
+
+        [HttpPost]
+        public void Answers(string radio)
         {
+
+            string userName = "Arman Amrazyan";
+
             string htmlTags = string.Empty;
+
+            int userAnswer = Convert.ToInt32(radio); // change
+
+            int rightAnswer = 1;
+
+            List<UserAnswers> userAnswers;
+
+            List<UserAnswers> AllUsersAndAnswers = new List<UserAnswers>();
+
+            AllUsersAndAnswers.Add(new UserAnswers() { UserName = "Arman Amrazyan", Answer = 1 });
+            AllUsersAndAnswers.Add(new UserAnswers() { UserName = "Hayk Altunyan", Answer = 1 });
+            AllUsersAndAnswers.Add(new UserAnswers() { UserName = "Nikos Nikolayidis", Answer = 1 });
+
+            Session["userData"] = AllUsersAndAnswers;
+            //if (Session["userData"] == null)
+            //{
+            //    userAnswers = new List<UserAnswers>();
+            //    userAnswers.Add(new UserAnswers() { UserName = userName, Answer = userAnswer });
+            //    Session["userData"] = userAnswers;
+            //}
+            //else
+            //{
+            //    userAnswers = Session["userData"] as List<UserAnswers>;
+            //    userAnswers.Add(new UserAnswers() { UserName = userName, Answer = userAnswer });
+            //    Session["userData"] = userAnswers;
+            //}
+            
+
+            #region IF-ELSE
             if (userAnswer == rightAnswer)
             {
                 for (int i = 1; i <= 4; i++)
@@ -70,52 +104,25 @@ namespace Diplom2017
                     htmlTags += "grayClass";
                 }
             }
+            #endregion
+
+
         }
         public void Online(string name)
         {
-           
+
             using (StreamWriter file = new StreamWriter(@"F:\Git\LessonManagement\Diplom2017\Content\Online\WriteText.txt", true))
             {
                 file.WriteLine(name);
             }
 
         }
+
+
         [HttpPost]
         public ActionResult ReadJson()
-        {
-
-            //List<QuestAnswers> data = null;
-            //using (DiplomeEntities db = new DiplomeEntities())
-            //{
-
-            //    data = (from quest in db.AllQuestions
-            //            join answ in db.AllAnswers
-            //            on quest.Id equals answ.AllQuest_Id
-            //            where quest.Id == 2
-
-            //            select new QuestAnswers
-            //            {
-            //                Subject = quest.Question,
-            //                Questions = answ.Answers,
-            //            }).ToList();
-            //}
-           
-
-            //Session["myquestions"] = data;
-
+        {           
             return PartialView("_userQuestions", Session["myquestions"]);
-
-        }
-        public void CreateJson()
-        {
-            Session["my"] = stClass.myring;
-            string json = " { \"Subject\":  \"Intel\" ,\"Quests\": [\"DVD read/writer\", \"DVD read/writer\",\"DVD read/writer\"]} ";
-
-            using (StreamWriter file = new StreamWriter(@"F:\Git\LessonManagement\Diplom2017\Content\Online\MyJSON3.json", true))
-            {
-                file.WriteLine(json);
-            }
-
         }
 
     }

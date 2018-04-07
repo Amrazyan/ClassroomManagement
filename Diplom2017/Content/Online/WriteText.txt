@@ -1,3 +1,10 @@
 From user2
 From user2
+<<<<<<< HEAD
 From user2
+From user2
+From user2
+From user2
+From user2
+=======
+>>>>>>> parent of c08c73b... Passint questions to user interface

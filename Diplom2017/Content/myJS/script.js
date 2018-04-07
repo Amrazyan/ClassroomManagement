@@ -159,28 +159,4 @@ Highcharts.chart('container2', {
 
 
 
-// Load google charts
-window.onload = function () {
-    google.charts.load('current', { 'packages': ['corechart'] });
-    google.charts.setOnLoadCallback(drawChart);
-    drawChart();
-}
-// Draw the chart and set the chart values
-function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-        ['Task', 'Hours per Day'],
-        ['', 0],
-        ['Բացակա', 2],
-        ['', 0],
-        ['Ներկա', 8],
 
-    ]);
-
-    var options = { 'title': '', 'width': 575, 'height': 270 };
-    var a = new google.visualization.PieChart(document.getElementById('piechart'));
-    a.draw(data, options);
-    var b = new google.visualization.PieChart(document.getElementById('piechart1'));
-    b.draw(data, options);
-
-}
-/////

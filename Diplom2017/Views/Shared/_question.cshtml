@@ -1,21 +1,18 @@
-﻿
-@*@Model IEnumerable<Diplom2017.Models.Quest>*@
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Questions</th>               
-            </tr>
-        </thead>
-        <tbody>         
-            @if (Model != null)
+﻿<table class="table">
+    <thead>
+        <tr>
+            <th>Questions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
             {
-                foreach (var item in Model)
-                {
-                    <tr>                      
-                        <td><input type="button" onclick="Create(this)" id="@item.Id" class="btn btn-default"  value="@item" /></td>
-                    </tr>
-                }
+                <tr>
+                    <td><input type="button" onclick="Create(this)" id="@item.Id" class="btn btn-default" value="@item" /></td>
+                </tr>
             }
-        </tbody>
-    </table>
+        }
+    </tbody>
+</table>

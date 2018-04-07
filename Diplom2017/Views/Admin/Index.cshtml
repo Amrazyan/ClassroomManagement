@@ -8,8 +8,9 @@
     <script src="~/Content/myJS/Jquery.js"></script>
     <script src="~/Content/myJS/HighCharts.js"></script>
     <script src="~/Content/myJS/HighChartExport.js"></script>
-    <script src="~/Content/myJS/Charts.js"></script>
     <script src="~/Content/myJS/Ajaxes.js"></script>
+    <script src="~/Scripts/Chart.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 
@@ -37,7 +38,7 @@
 
                     <div class="politech">
                         <h4> P</h4><h5>olitechnic</h5>
-                    
+
                     </div>
 
                     <div class="drops">
@@ -47,9 +48,9 @@
                             </optgroup>
                         </select>
                         @*<ul class="dropdown-menu">
-                            <li><a href="#">Dropdown link</a></li>
-                            <li><a href="#">Dropdown link</a></li>
-                        </ul>*@
+                                <li><a href="#">Dropdown link</a></li>
+                                <li><a href="#">Dropdown link</a></li>
+                            </ul>*@
 
                         <select class="form-control" data-live-search="true" id="theme">
                             <optgroup label="Themes" id="thme">
@@ -75,12 +76,12 @@
                     <nav class="navbar my_nav">
                         <!-- Navbar content -->
                         @*<img src="~/Content/Photos/Logo.png" class="logo" />*@
-                        
+
                         <div class="inner-addon left-addon" style="float:left">
                             <i class="glyphicon glyphicon-search"></i>
                             <input type="text" placeholder="Search" class="form-control" />
                         </div>
-                      
+
                         <span>
                             @Session["prof"]
                         </span>
@@ -89,14 +90,23 @@
                 <div class="row" style="height:200px; background-color:navajowhite;">
                     <div class="porc" id="por">
 
-                        @Html.Partial("_question") 
-                       
+                        @Html.Partial("_question")
+
                     </div>
                     <!---->
-                    @*<div id="piechart" style="float:left;"></div>
-                        <div id="piechart1" style="float:left;"></div>*@
+                    <div id="piechart" style="float:left; width:20%; height:200px"></div>
+                    <div id="piechart1" style="float:left; width:20%; height:200px"></div>
 
+                    <div style="float:left; width:300px; height:150px">
+                        <canvas id="charts"></canvas>
+                    </div>
+
+                    <input type="button" class="btn btn-danger" id="chartButton" value="Create Data"/>
+
+                    <input type="button" class="btn btn-danger" id="showChart" value="Show Chart" />
                 </div>
+
+                <h1>@Session["hello"]</h1>
 
                 @RenderBody()
 
@@ -106,7 +116,95 @@
     </div>
     <script type="text/javascript">
         $(document).ready(function () {
-            
+
+
+            $("#chartButton").click(function () {
+
+                $.ajax({
+                    url: '/Admin/Chart',
+                    type: "GET",
+
+                    //data: JSON.stringify({ 'name': 'From user2' }),
+
+                    contentType: "application/json",
+                    dataType: "html",
+
+                    success: function () {
+                        // $('#badge').append(data);
+                        alert(1);
+                    },
+                    error: function () {
+                        alert("ERROR");
+                    }
+                });
+            }   /// LOGGED STUDENTS DEMO
+            );
+
+            //google.charts.load('current', { 'packages': ['corechart'] });
+            //google.charts.setOnLoadCallback(drawChart);
+
+            //function drawChart() {
+            //    var data = google.visualization.arrayToDataTable([
+            //        ['Task', 'Hours per Day'],
+            //        ['', 0],
+            //        ['Wrong answer', 20],
+            //        ['Always right', 10],
+            //        ['Arman Amrazyan, Hayk Altunyan, Arman Hovhannisyan, Nikolay Nikolayidis, Sona Gyulamiryan', 30],
+
+            //    ]);
+            //    var options = {
+            //        is3D: true,
+            //        'backgroundColor': 'transparent',
+            //        legend: 'none'
+            //    };
+            //    var a = new google.visualization.PieChart(document.getElementById('piechart'));
+            //    a.draw(data, options);
+            //    var b = new google.visualization.PieChart(document.getElementById('piechart1'));
+            //    b.draw(data, options);
+
+            // }
+
+            $("#showChart").click(function () {
+
+                var chartId = document.getElementById("charts");
+
+             
+
+              
+                var names = @Html.Raw(Json.Encode(Session["nameList"]));
+                
+                var numbers = @Html.Raw(Json.Encode(Session["numberList"]));
+
+
+                alert(names);
+                alert(numbers);
+               
+               
+                var myChart = new Chart(chartId, {
+                    type: 'pie',
+                    data: {
+                        labels: [names, names],
+                       
+                        datasets: [
+                            {
+                               // label: 'Points',
+                                backgroundColor: ['#f1c40f', '#e67e22', '#16a085'],
+                                data: [numbers, numbers]
+                            }
+                        ]
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        legends: { display: false },
+                        
+
+                        //responsive: true,
+
+                    }
+                });
+
+            });
+
 
 
         });
@@ -119,7 +217,7 @@
 
     <script>
 
-        function Create (o) {
+        function Create(o) {
 
             alert(o.id);
             $.ajax({
@@ -129,7 +227,7 @@
 
                 data: JSON.stringify({ 'Id': o.id }),
                 contentType: "application/json",
-               // dataType: "html",
+                // dataType: "html",
 
                 success: function () {
                     // $('#badge').append(data);
@@ -140,7 +238,7 @@
                 }
             });
         }   /// LOGGED STUDENTS DEMO
-        
+
 
     </script>
 
