@@ -225,7 +225,7 @@ namespace Diplom2017
                 count++;                
             }
             numbers.Add(count);
-
+            int a = 15;
             Session["numberList"] = numbers;
             Session["nameList"] = names;
 
