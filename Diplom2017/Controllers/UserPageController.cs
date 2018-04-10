@@ -58,9 +58,9 @@ namespace Diplom2017
 
             List<UserAnswers> AllUsersAndAnswers = new List<UserAnswers>();
 
-            AllUsersAndAnswers.Add(new UserAnswers() { UserName = "Arman Amrazyan", Answer = 1 });
-            AllUsersAndAnswers.Add(new UserAnswers() { UserName = "Hayk Altunyan", Answer = 1 });
-            AllUsersAndAnswers.Add(new UserAnswers() { UserName = "Nikos Nikolayidis", Answer = 1 });
+            AllUsersAndAnswers.Add(new UserAnswers() { UserId = 1, Answer = 1 });
+            AllUsersAndAnswers.Add(new UserAnswers() { UserId = 3, Answer = 0 });
+            AllUsersAndAnswers.Add(new UserAnswers() { UserId = 2, Answer = 1 });
 
             Session["userData"] = AllUsersAndAnswers;
             //if (Session["userData"] == null)

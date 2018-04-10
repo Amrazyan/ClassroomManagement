@@ -8,7 +8,7 @@ namespace Diplom2017.Models
     public class UserAnswers
     {
 
-        public string UserName { get; set; }
+        public int UserId { get; set; }
 
         public int Answer { get; set; }
     }

@@ -204,31 +204,60 @@ namespace Diplom2017
 
         public void Chart()
         {
-            List<string> names = new List<string>();
+            List<string> smartNames = new List<string>();
+            List<string> badNames = new List<string>();
 
             //names.Add("Arman Amrazyan");
             //names.Add("Hayk Altunyan");
             //names.Add("Nikos Nikolayidis");
 
-            List<int> numbers = new List<int>();
+            
 
             //numbers.Add(50);
             //numbers.Add(150);
             //numbers.Add(10);
             int count = 0;
-          
+           List<Stud_Answers> studAnswers = new List<Stud_Answers>();
 
-            List<UserAnswers> userData = Session["userData"] as List<UserAnswers>;
-
-            foreach (UserAnswers item in userData.FindAll(e => e.Answer == 1))
+            if (Session["userData"] != null)
             {
-                names.Add(item.UserName);
-                count++;                
+                List<UserAnswers> userData = Session["userData"] as List<UserAnswers>;
+                foreach (var item in userData)
+                {
+                    studAnswers.Add(new Stud_Answers { stud_id = item.UserId, theme_id = 2, answer_percent = item.Answer, answer_data = DateTime.UtcNow.Date }); /// !IMPORTANT change percent to questions
+                }
+                using (DiplomeEntities db = new DiplomeEntities())
+                {
+                    foreach (var item in studAnswers)
+                    {
+                        db.Stud_Answers.Add(item);
+                    }
+                    db.SaveChanges();
+                }
             }
-            numbers.Add(count);
+            
 
-            Session["numberList"] = numbers;
-            Session["nameList"] = names;
+            int answersCount = 1; // will be incrementing
+
+            using (DiplomeEntities db = new DiplomeEntities())
+            {               
+                smartNames = (from student in db.Students
+                        join stud_answers in db.Stud_Answers
+                        on student.Id equals stud_answers.stud_id
+                        where stud_answers.answer_percent == 1              /// !IMPORTANT change percent to questions
+                        select student.Name + " " + student.Surname).ToList();
+
+                badNames = (from student in db.Students
+                                join stud_answers in db.Stud_Answers
+                                on student.Id equals stud_answers.stud_id
+                                where stud_answers.answer_percent == 0      /// !IMPORTANT change percent to questions
+                                select student.Name + " " + student.Surname).ToList();
+            }
+           
+            Session["smartNames"] = smartNames;
+            Session["badNames"] = badNames;
+            Session["smartNumberList"] = smartNames.Count;
+            Session["badNumberList"] = badNames.Count;
 
         }
 

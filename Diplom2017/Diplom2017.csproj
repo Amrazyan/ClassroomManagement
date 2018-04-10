@@ -160,7 +160,6 @@
     <Compile Include="Models\Lectures.cs" />
     <Compile Include="Models\Quest.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserPageController.cs" />
     <Compile Include="App_Data\DBModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -269,9 +268,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\UserPage\Index.cshtml" />
     <Content Include="Views\UserPage\User.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
