@@ -2,6 +2,8 @@
     Layout = null;
 }
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,15 +27,18 @@
                 <div style="padding-top:6%; padding-bottom:16%">
 
 
-                    <form action="@Url.Action("Answers", "UserPage")" method="post" id="selected">
+                  @*  <form action="@Url.Action("Answers", "UserPage")" method="post" id="selected">*@
 
                         <h1>@Session["my"]</h1>
 
                         <h1 id="h"> @*Subjects*@</h1>
 
-                        <div id="mydiv" class="form-group">
+                        <input type="hidden" name="userId" value="2" id="HiddenText" />
+
+                        <div id="questions" class="form-group">
 
                             <!--Quesitons-->
+
                         </div>
 
                         <hr>
@@ -41,13 +46,12 @@
 
                         </div>
                         <div class="form-group">
-                            <!--<button type="button" id="sbmit" class="btn btn-submit">CLICK</button>-->
-                            <!--<button type="button" id="create" class="btn btn-submit" style="float:right"> Create Json </button>-->
 
                             <button type="button" id="read" class="btn btn-submit" style="float:right"> Read Json </button>
-                            <button type="submit" id="sendAnswer"  class="btn btn-success" style="float:right"> Send </button>
+                            <button type="submit" id="sendAnswer" class="btn btn-success" style="float:right"> Send </button>
+
                         </div>
-                    </form>
+                    @*</form>*@
 
 
                     <h2 id="h2"></h2>
@@ -60,6 +64,39 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
+
+            $("#sendAnswer").click(function () {             
+
+                var userId = 2; //////////////////////////////CHANGE TO REAL USER ID
+
+                var radioButtons = $("#questions input:radio[name='radio']");
+
+                var right = $("#questions input:radio[name='radio'][value = '1']");
+                var rightIndex = radioButtons.index(right); 
+
+                var selected = $("input[type='radio'][name='radio']:checked");
+                var selectedIndex = radioButtons.index(selected);
+
+
+                var date = { "userAnswer": selected.val(), "userId": userId, "rightIndex": rightIndex, "selectedIndex": selectedIndex };
+
+                $.ajax({
+                    url: '/UserPage/Answers',
+                    type: "POST",
+
+                    contentType: "application/json",
+                    dataType: "json",
+                    data: JSON.stringify(date),
+
+                    success: function (data) {
+                        alert("success");
+                        $('#questions').html(data);
+                    },
+                    error: function () {
+                        alert("ERROR");
+                    }
+                });
+            });
 
             $("#read").click(function () {
 
@@ -74,7 +111,7 @@
 
                     success: function (data) {
                         alert("success");
-                        $('#mydiv').html(data);
+                        $('#questions').html(data);
                     },
                     error: function () {
                         alert("ERROR");

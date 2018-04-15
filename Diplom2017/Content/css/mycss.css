@@ -7,6 +7,13 @@ body {
     background-color: #f1f3f6;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+.chartContainer {
+    height:200px; 
+    background-color:white;
+    /*//overflow:hidden;*/
+   
+    overflow-y:scroll; 
+}
 .canvasParent{
     display:inline-block;
     width:300px;

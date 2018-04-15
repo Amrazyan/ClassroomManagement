@@ -34,5 +34,6 @@ namespace Diplom2017.App_Data
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Theme> Themes { get; set; }
+        public virtual DbSet<StudAnswers_live> StudAnswers_live { get; set; }
     }
 }

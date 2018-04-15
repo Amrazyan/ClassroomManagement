@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DiplomeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DiplomeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AllAnswers">
           <Key>
             <PropertyRef Name="Id" />
@@ -57,6 +57,16 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="stud_id" Type="int" Nullable="false" />
           <Property Name="attendance" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudAnswers_live">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Stud_Id" Type="int" />
+          <Property Name="Question_Id" Type="int" />
+          <Property Name="Stud_Answer" Type="int" />
+          <Property Name="Data" Type="date" />
         </EntityType>
         <EntityType Name="Students">
           <Key>
@@ -180,6 +190,7 @@
           <EntitySet Name="Proffesor" EntityType="Self.Proffesor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stud_Answers" EntityType="Self.Stud_Answers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stud_attendance" EntityType="Self.Stud_attendance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudAnswers_live" EntityType="Self.StudAnswers_live" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Themes" EntityType="Self.Themes" Schema="dbo" store:Type="Tables" />
@@ -212,8 +223,7 @@
             <End Role="Themes" EntitySet="Themes" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DiplomeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -437,7 +447,18 @@
             <End Role="Students" EntitySet="Students" />
             <End Role="Stud_attendance" EntitySet="Stud_attendance" />
           </AssociationSet>
+          <EntitySet Name="StudAnswers_live" EntityType="DiplomeModel.StudAnswers_live" />
         </EntityContainer>
+        <EntityType Name="StudAnswers_live">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Stud_Id" Type="Int32" />
+          <Property Name="Question_Id" Type="Int32" />
+          <Property Name="Stud_Answer" Type="Int32" />
+          <Property Name="Data" Type="DateTime" Precision="0" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -534,6 +555,17 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Lect_themes" ColumnName="Lect_themes" />
                 <ScalarProperty Name="Lesson_id" ColumnName="Lesson_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudAnswers_live">
+            <EntityTypeMapping TypeName="DiplomeModel.StudAnswers_live">
+              <MappingFragment StoreEntitySet="StudAnswers_live">
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Stud_Answer" ColumnName="Stud_Answer" />
+                <ScalarProperty Name="Question_Id" ColumnName="Question_Id" />
+                <ScalarProperty Name="Stud_Id" ColumnName="Stud_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

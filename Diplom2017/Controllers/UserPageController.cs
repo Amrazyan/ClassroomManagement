@@ -43,70 +43,60 @@ namespace Diplom2017
 
 
         [HttpPost]
-        public void Answers(string radio)
+        public void Answers(string userAnswer, string userId, string rightIndex, string selectedIndex) //Stugel
         {
-
-            string userName = "Arman Amrazyan";
-
+           
             string htmlTags = string.Empty;
 
-            int userAnswer = Convert.ToInt32(radio); // change
+            int userAnswerr = Convert.ToInt32(userAnswer); // change
+            int userID = Convert.ToInt32(userId);
+            int rightindex = Convert.ToInt32(rightIndex);
+            int slctindex = Convert.ToInt32(selectedIndex);
 
-            int rightAnswer = 1;
+            StudAnswers_live studAnswLive = new StudAnswers_live() { Stud_Id = userID, Question_Id = AdminController.questId, Stud_Answer = userAnswerr, Data = DateTime.UtcNow.Date };                             
 
-            List<UserAnswers> userAnswers;
+            using (DiplomeEntities db = new DiplomeEntities())
+            {            
+                db.StudAnswers_live.Add(studAnswLive);
+                
+                db.SaveChanges();
+            }
 
-            List<UserAnswers> AllUsersAndAnswers = new List<UserAnswers>();
-
-            AllUsersAndAnswers.Add(new UserAnswers() { UserId = 1, Answer = 1 });
-            AllUsersAndAnswers.Add(new UserAnswers() { UserId = 3, Answer = 0 });
-            AllUsersAndAnswers.Add(new UserAnswers() { UserId = 2, Answer = 1 });
-
-            Session["userData"] = AllUsersAndAnswers;
-            //if (Session["userData"] == null)
-            //{
-            //    userAnswers = new List<UserAnswers>();
-            //    userAnswers.Add(new UserAnswers() { UserName = userName, Answer = userAnswer });
-            //    Session["userData"] = userAnswers;
-            //}
-            //else
-            //{
-            //    userAnswers = Session["userData"] as List<UserAnswers>;
-            //    userAnswers.Add(new UserAnswers() { UserName = userName, Answer = userAnswer });
-            //    Session["userData"] = userAnswers;
-            //}
-            
+            htmlTags += "<div class='col-sm-3 col-xs'> <div class='card card-3'>";
+            htmlTags += "<p>Arman Amrazyan</p>";
 
             #region IF-ELSE
-            if (userAnswer == rightAnswer)
+            if (userAnswerr == 1)
             {
-                for (int i = 1; i <= 4; i++)
+                for (int i = 0; i < 4; i++)
                 {
-                    if (i == rightAnswer)
-                        htmlTags += "greenClass";
+                    if (i == rightindex)
+                        htmlTags += "<div class='test test-gr'></div>";
                     else
-                        htmlTags += "grayClass";
+                        htmlTags += "<div class='test'></div>";
                 }
             }
             else
             {
-                for (int i = 1; i <= 4; i++)
+                for (int i = 0; i < 4; i++)
                 {
-                    if (i == rightAnswer)
+                    if (i == rightindex)
                     {
-                        htmlTags += "greenClass";
+                        htmlTags += "<div class='test test-gr'></div>";
                         continue;
                     }
-                    if (i == userAnswer)
+                    if (i == slctindex)
                     {
-                        htmlTags += "redClass";
+                        htmlTags += "<div class='test test-red'></div>";
                         continue;
                     }
-                    htmlTags += "grayClass";
+                    htmlTags += "<div class='test'></div>";
                 }
             }
             #endregion
 
+            htmlTags += "</div> </div>";
+            OnlineStudentAnswersST.StudList.Add(htmlTags);
 
         }
         public void Online(string name)

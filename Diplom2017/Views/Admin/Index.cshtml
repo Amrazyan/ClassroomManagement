@@ -87,59 +87,78 @@
                         </span>
                     </nav>
                 </div>
-                <div class="row" style="height:200px; background-color:navajowhite;">
+                <div class="row chartContainer">
                     <div class="porc" id="por">
 
                         @Html.Partial("_question")
 
                     </div>
-                 
+
                     <!--///////////////////-->
                     <div style="width:100%; height:150px;">
-                        <div class="canvasParent">
-                            <canvas id="charts0"></canvas>
-                        </div>
-                        <div class="canvasParent">
-                            <canvas id="charts1"></canvas>
-                        </div>
-                        <div class="canvasParent">
-                            <canvas id="charts2"></canvas>
-                        </div>
+                        @for (int i = 0; i < 20; i++)
+                        {
+                            string name = "charts" + i;
+                            <div class="canvasParent">
+                                <canvas id="@name"></canvas>
+                            </div>
+                        }
                     </div>
 
                     <!--///////////////////-->
 
-                    <input type="button" style="float:right" class="btn btn-danger" id="chartButton" value="Create Data" />
-
-                    <input type="button" style="float:right" class="btn btn-danger" id="showChart" value="Show Chart" />
+                    <input type="button" style="float:right" class="btn btn-danger" id="chartButton" value="Show" />
+                    <input type="button" style="float:right" class="btn btn-success" id="answerHtml" value="html" />
                 </div>
 
                 <h1>@Session["hello"]</h1>
 
-                @RenderBody()
+                    @RenderBody()
 
-
+                </div>
             </div>
-        </div>
     </div>
     <script type="text/javascript">
         $(document).ready(function () {
 
+            $("#answerHtml").click(function () {
+               
+                $.ajax({
+                    url: '/Admin/answerHtml',
+                    type: "POST",
+
+                    contentType: "application/json",
+                    dataType: "json",
+
+                    success: function (data) {
+
+                        $("#root").html("");
+
+                        data.forEach(function (item) {
+                            $("#root").append(item);
+                        })
+                    },
+                    error: function () {
+                        alert("ERROR");
+                    }
+                });
+
+            });
 
             $("#chartButton").click(function () {
 
                 $.ajax({
                     url: '/Admin/Chart',
-                    type: "GET",
+                    type: "POST",
 
                     //data: JSON.stringify({ 'name': 'From user2' }),
 
                     contentType: "application/json",
-                    dataType: "html",
+                    dataType: "json",
 
-                    success: function () {
-                        // $('#badge').append(data);
-                        alert(1);
+                    success: function (data) {
+
+                        showChart(data);
                     },
                     error: function () {
                         alert("ERROR");
@@ -148,30 +167,27 @@
             });
 
             count = 0;
-            $("#showChart").click(function () {
 
+          function showChart (array) {
 
                 var canvasName = "charts" + count;
-                alert(canvasName);
-                alert(count);
                 count++;
 
                 var chartId = document.getElementById(canvasName);
-                var smartNames = @Html.Raw(Json.Encode(Session["smartNames"]));
-                var badNames = @Html.Raw(Json.Encode(Session["badNames"]));
-                var smartNamesCount = @Html.Raw(Json.Encode(Session["martNumberList"]));
-                var badNamesCount = @Html.Raw(Json.Encode(Session["badNumberList"]));
+
+                var smartNames = JSON.parse(array[0]);
+                var badNames = JSON.parse(array[1]);
+                var alwaysSmartNames = JSON.parse(array[2]);
 
                 var myChart = new Chart(chartId, {
                     type: 'pie',
                     data: {
-                        labels: [badNames, smartNames],
+                        labels: [badNames, smartNames, alwaysSmartNames],
 
                         datasets: [
                             {
-                               // label: 'Points',
-                                backgroundColor: ['#FF0000', '#00cc00', '#16a085'],
-                                data: [badNamesCount, smartNamesCount]
+                                backgroundColor: ['#FF0000', '#00cc00', '#ffd368'],
+                                data: [badNames.length, smartNames.length,alwaysSmartNames.length]
                             }
                         ]
                     },
@@ -181,7 +197,7 @@
                     }
                 });
 
-            });
+            };
 
 
 
@@ -199,7 +215,7 @@
 
             alert(o.id);
             $.ajax({
-                url: '/Admin/CreateJson',
+                url: '/Admin/CreateQuestion',
                 type: "POST",
 
 

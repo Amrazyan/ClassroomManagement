@@ -153,11 +153,15 @@
     <Compile Include="App_Data\AllQuestion.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="App_Data\StudAnswers_live.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Models\FilterQuestions.cs" />
     <Compile Include="Models\Lectures.cs" />
+    <Compile Include="Models\OnlineStudentAnswersST.cs" />
     <Compile Include="Models\Quest.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\UserPageController.cs" />

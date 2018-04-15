@@ -11,9 +11,11 @@ using Newtonsoft.Json;
 
 namespace Diplom2017
 {
+    
 
     public class AdminController : Controller
     {
+        public static int questId;
 
         #region Login
         // POST: Admin
@@ -172,7 +174,7 @@ namespace Diplom2017
 
 
         [HttpPost]
-        public void CreateJson(string Id)/////////////////////////////////////////////////////////////////////////////////
+        public void CreateQuestion(string Id)/////////////////////////////////////////////////////////////////////////////////
         {
             int indx = Convert.ToInt32(Id);
 
@@ -193,71 +195,65 @@ namespace Diplom2017
                         }).ToList();
             }
 
+            questId = indx; //Question Id
 
             Session["myquestions"] = data;
            
 
         }
+        [HttpPost]
+        public ActionResult answerHtml()
+        {
+           
+            return Json(OnlineStudentAnswersST.StudList);
+        }
 
-
-
-
-        public void Chart()
+        [HttpPost]
+        public ActionResult Chart()
         {
             List<string> smartNames = new List<string>();
             List<string> badNames = new List<string>();
+            List<string> alwaysSmart = new List<string>();
 
-            //names.Add("Arman Amrazyan");
-            //names.Add("Hayk Altunyan");
-            //names.Add("Nikos Nikolayidis");
-
-            
-
-            //numbers.Add(50);
-            //numbers.Add(150);
-            //numbers.Add(10);
-            int count = 0;
-           List<Stud_Answers> studAnswers = new List<Stud_Answers>();
-
-            if (Session["userData"] != null)
-            {
-                List<UserAnswers> userData = Session["userData"] as List<UserAnswers>;
-                foreach (var item in userData)
-                {
-                    studAnswers.Add(new Stud_Answers { stud_id = item.UserId, theme_id = 2, answer_percent = item.Answer, answer_data = DateTime.UtcNow.Date }); /// !IMPORTANT change percent to questions
-                }
-                using (DiplomeEntities db = new DiplomeEntities())
-                {
-                    foreach (var item in studAnswers)
-                    {
-                        db.Stud_Answers.Add(item);
-                    }
-                    db.SaveChanges();
-                }
-            }
-            
-
-            int answersCount = 1; // will be incrementing
+            int answersCount;
 
             using (DiplomeEntities db = new DiplomeEntities())
-            {               
-                smartNames = (from student in db.Students
-                        join stud_answers in db.Stud_Answers
-                        on student.Id equals stud_answers.stud_id
-                        where stud_answers.answer_percent == 1              /// !IMPORTANT change percent to questions
-                        select student.Name + " " + student.Surname).ToList();
+            {
+                answersCount = db.StudAnswers_live.Select(s => s.Question_Id).Distinct().Count();
 
-                badNames = (from student in db.Students
-                                join stud_answers in db.Stud_Answers
-                                on student.Id equals stud_answers.stud_id
-                                where stud_answers.answer_percent == 0      /// !IMPORTANT change percent to questions
+                smartNames = (from student in db.Students
+                                join stud_answersLive in db.StudAnswers_live
+                                on student.Id equals stud_answersLive.Stud_Id
+                                where stud_answersLive.Stud_Answer == 1 && stud_answersLive.Question_Id == AdminController.questId
                                 select student.Name + " " + student.Surname).ToList();
+
+                badNames = (from student1 in db.Students
+                                join stud_answersLive in db.StudAnswers_live
+                                on student1.Id equals stud_answersLive.Stud_Id
+                                where stud_answersLive.Stud_Answer == 0 && stud_answersLive.Question_Id == AdminController.questId
+                                select student1.Name + " " + student1.Surname).ToList();
+
+                alwaysSmart = (from student2 in db.Students
+                               join stud_answersLive in db.StudAnswers_live
+                               on student2.Id equals stud_answersLive.Stud_Id
+                               where  stud_answersLive.Stud_Answer == 1
+                               group stud_answersLive by new { stud_answersLive.Stud_Answer , student2.Name, student2.Surname } into g
+                               where (g.Sum(p => p.Stud_Answer)) == answersCount
+                               select  g.Key.Name + "" + g.Key.Surname ).ToList();
+
             }
-           
-            Session["smartNames"] = smartNames;
-            Session["badNames"] = badNames;
-            Session["smartNumberList"] = smartNames.Count;
-            Session["badNumberList"] = badNames.Count;
+
+            var smrtNames = JsonConvert.SerializeObject(smartNames);
+            var bdNames = JsonConvert.SerializeObject(badNames);
+            var alwSmart = JsonConvert.SerializeObject(alwaysSmart);
+
+            return Json(new[] 
+            {       
+                    
+                    smrtNames,
+                    bdNames,
+                    alwSmart
+            });
 
         }
 

@@ -21,6 +21,7 @@
         <AssociationConnector Association="DiplomeModel.FK_Stud_Answers_Students" ManuallyRouted="false" />
         <AssociationConnector Association="DiplomeModel.FK_Stud_Answers_Themes" ManuallyRouted="false" />
         <AssociationConnector Association="DiplomeModel.FK_Stud_attendance_Students" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DiplomeModel.StudAnswers_live" Width="1.5" PointX="3.75" PointY="1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
