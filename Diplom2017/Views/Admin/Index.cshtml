@@ -94,13 +94,12 @@
 
                     </div>
 
-                    <!--///////////////////-->
-                    <div style="width:100%; height:150px;">
+                    <!--///////////////////-->                    
                         @for (int i = 0; i < 20; i++)
                         {
                             string name = "charts" + i;
                             <div class="canvasParent">
-                                <canvas id="@name"></canvas>
+                                <div id="@name"></div>
                             </div>
                         }
                     </div>
@@ -157,8 +156,7 @@
                     dataType: "json",
 
                     success: function (data) {
-
-                        showChart(data);
+                        showHigh(data);
                     },
                     error: function () {
                         alert("ERROR");
@@ -167,39 +165,62 @@
             });
 
             count = 0;
+            function showHigh(arr) {
 
-          function showChart (array) {
-
-                var canvasName = "charts" + count;
+                var divName = "charts" + count;
                 count++;
+                var chartId = document.getElementById(divName);
 
-                var chartId = document.getElementById(canvasName);
+                var smartNames = JSON.parse(arr[0]);
+                var badNames = JSON.parse(arr[1]);
+                var alwaysSmartNames = JSON.parse(arr[2]);
 
-                var smartNames = JSON.parse(array[0]);
-                var badNames = JSON.parse(array[1]);
-                var alwaysSmartNames = JSON.parse(array[2]);
-
-                var myChart = new Chart(chartId, {
-                    type: 'pie',
-                    data: {
-                        labels: [badNames, smartNames, alwaysSmartNames],
-
-                        datasets: [
-                            {
-                                backgroundColor: ['#FF0000', '#00cc00', '#ffd368'],
-                                data: [badNames.length, smartNames.length,alwaysSmartNames.length]
-                            }
-                        ]
-                    },
-                    options: {
-                        maintainAspectRatio: false,
-                        legends: { display: false },
-                    }
+                // Build the chart
+                Highcharts.setOptions({
+                    colors: ['green', 'red', 'orange']
                 });
 
+                Highcharts.chart(chartId, {
+                    chart: {
+                        plotShadow: false,
+                        type: 'pie'
+                    },
+                    title: {
+                        text: ''
+                    },
+                    tooltip: {
+                        pointFormat: '{data.name}'
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: false
+                            },
+
+                        }
+                    },
+                    series: [{
+                        data: [{
+                            name: smartNames,
+                            y: smartNames.length
+                            
+                        },
+                        {
+                            name: badNames,
+                            y: badNames.length
+                        },
+                        {
+                            name: alwaysSmartNames,
+                            y: alwaysSmartNames.length,
+                            sliced: true,
+                            selected: true
+                        }]
+
+                    }]
+                })
             };
-
-
 
         });
     </script>
@@ -213,7 +234,6 @@
 
         function Create(o) {
 
-            alert(o.id);
             $.ajax({
                 url: '/Admin/CreateQuestion',
                 type: "POST",
@@ -224,8 +244,7 @@
                 // dataType: "html",
 
                 success: function () {
-                    // $('#badge').append(data);
-                    alert(1);
+                    clos();
                 },
                 error: function (e) {
                     alert(e.message);

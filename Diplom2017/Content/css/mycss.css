@@ -17,6 +17,10 @@ body {
 .canvasParent{
     display:inline-block;
     width:300px;
+    height:200px;
+}
+.canvasParent div{
+    height:100%;
 }
 canvas{
     width:100% !important;
