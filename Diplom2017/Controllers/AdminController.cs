@@ -16,6 +16,7 @@ namespace Diplom2017
     public class AdminController : Controller
     {
         public static int questId;
+        public static int currentThemeId;
 
         #region Login
         // POST: Admin
@@ -96,6 +97,9 @@ namespace Diplom2017
             //////////////////////////////
 
             int indx = Convert.ToInt32(index);
+
+            currentThemeId = indx; ///////////////////////////////////////////////////////////////////////////////////////////
+
             List<FilterQuestions> data = null;
 
             using (DiplomeEntities db = new DiplomeEntities())
@@ -146,10 +150,7 @@ namespace Diplom2017
         {
             return View();
         }
-        public ActionResult Statistics()
-        {
-            return View();
-        }
+
         public ActionResult DayStatic()
         {
             return View();
@@ -171,7 +172,6 @@ namespace Diplom2017
 
             return Content(hyp);
         }
-
 
         [HttpPost]
         public void CreateQuestion(string Id)/////////////////////////////////////////////////////////////////////////////////
@@ -201,11 +201,33 @@ namespace Diplom2017
            
 
         }
+
         [HttpPost]
         public ActionResult answerHtml()
         {
            
             return Json(OnlineStudentAnswersST.StudList);
+        }
+
+        public ActionResult Statistics()
+        {
+
+            ////////////////////////////////////////////
+
+            List<StatiscticsModel> statistics = new List<StatiscticsModel>();
+            using (DiplomeEntities db = new DiplomeEntities())
+            {
+                statistics = (from stud_answ in db.Stud_Answers
+                              join student in db.Students
+                              on stud_answ.stud_id equals student.Id
+                              //where stud_answ.theme_id == currentThemeId
+
+                              group stud_answ by new { student.Name , student.Surname, stud_answ.answer_data} into gr
+                              select new StatiscticsModel { Name = gr.Key.Name + " " + gr.Key.Surname, Percent = gr.Average(g => g.answer_percent), Date = gr.Key.answer_data}).ToList();
+            }
+            var stat = JsonConvert.SerializeObject(statistics);
+            Session["Statistics"] = stat;
+            return View();
         }
 
         [HttpPost]

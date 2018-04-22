@@ -53,12 +53,12 @@ namespace Diplom2017
             int rightindex = Convert.ToInt32(rightIndex);
             int slctindex = Convert.ToInt32(selectedIndex);
 
-            StudAnswers_live studAnswLive = new StudAnswers_live() { Stud_Id = userID, Question_Id = AdminController.questId, Stud_Answer = userAnswerr, Data = DateTime.UtcNow.Date };                             
-
+            StudAnswers_live studAnswLive = new StudAnswers_live() { Stud_Id = userID, Question_Id = AdminController.questId, Stud_Answer = userAnswerr, Data = DateTime.UtcNow.Date };
+            Stud_Answers stud_Answers = new Stud_Answers() { stud_id = userID, theme_id = AdminController.currentThemeId, answer_percent = userAnswerr == 1 ? 100 : 0, answer_data = DateTime.UtcNow.Date };
             using (DiplomeEntities db = new DiplomeEntities())
             {            
                 db.StudAnswers_live.Add(studAnswLive);
-                
+                db.Stud_Answers.Add(stud_Answers);
                 db.SaveChanges();
             }
 

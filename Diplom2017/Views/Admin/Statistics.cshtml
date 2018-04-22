@@ -6,7 +6,7 @@
 
 <div class="row">
     <div class="col-sm-4 col-xs">
-        <div id="container" class="capsula"></div>
+        <div id="container0" class="capsula"></div>
     </div>
     <div class="col-sm-4 col-xs">
         <div id="container1" class="capsula"></div>
@@ -16,3 +16,66 @@
     </div>
 
 </div>
+<script>
+
+$(document).ready(function () {
+
+    var data = @Html.Raw(Session["Statistics"]);
+
+    var container;
+    var count = 0;
+    data.forEach(function (item) {
+        container = "container" + count++;
+        stats(item, container)
+
+    });
+
+
+});
+
+    times = 0;
+
+     function stats(data,containerId) {
+
+         
+         Highcharts.chart(containerId, {
+             chart: {
+                 type: 'areaspline'
+             },
+             title: {
+                 text: 'Ուսանողի առաջընթաց'
+             },
+             legend: {
+
+             },
+             xAxis: {
+                 categories: [
+                     data.Date
+                 ],
+             },
+             yAxis: {
+                 title: {
+                     text: 'Տոկոս'
+                 }
+             },
+             tooltip: {
+                 shared: true,
+                 valueSuffix: ' %'
+             },
+             credits: {
+                 enabled: false
+             },
+             plotOptions: {
+                 areaspline: {
+                     fillOpacity: 0.2
+                 }
+             },
+             colors: ["#88c1f0"],
+             series: [{
+                 name: data.Name,
+                 data: [data.Percent]
+             }]
+         });
+     }
+
+</script>

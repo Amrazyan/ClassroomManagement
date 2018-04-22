@@ -190,6 +190,7 @@
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\QuestAnswers.cs" />
+    <Compile Include="Models\StatiscticsModel.cs" />
     <Compile Include="Models\Themes.cs" />
     <Compile Include="Models\UserAnswers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
