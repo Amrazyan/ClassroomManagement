@@ -37,7 +37,7 @@
                 <div class="sidenav" id="leftNav" style="left:0;">
 
                     <div class="politech">
-                        <h4> P</h4><h5>olitechnic</h5>
+                        <h4> Պ</h4><h5>ոլիտեխնիկ</h5>
 
                     </div>
 
@@ -48,9 +48,9 @@
                             </optgroup>
                         </select>
                         @*<ul class="dropdown-menu">
-                                <li><a href="#">Dropdown link</a></li>
-                                <li><a href="#">Dropdown link</a></li>
-                            </ul>*@
+                            <li><a href="#">Dropdown link</a></li>
+                            <li><a href="#">Dropdown link</a></li>
+                        </ul>*@
 
                         <select class="form-control" data-live-search="true" id="theme">
                             <optgroup label="Themes" id="thme">
@@ -62,7 +62,7 @@
                     <span id="quest" class="sp"><p> &#8250;</p></span>
                     </br>
                     </br>
-                    <h5>  <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Active Students</h5>
+                    <h5>  <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Ակտիվ ուսանողներ</h5>
                     <hr>
                     <div class="pad">
                         @Html.Partial("_OnlineStudents")
@@ -79,7 +79,7 @@
 
                         <div class="inner-addon left-addon" style="float:left">
                             <i class="glyphicon glyphicon-search"></i>
-                            <input type="text" placeholder="Search" class="form-control" />
+                            <input type="text" placeholder="Որոնել" class="form-control" />
                         </div>
 
                         <span>
@@ -94,136 +94,32 @@
 
                     </div>
 
-                    <!--///////////////////-->                    
-                        @for (int i = 0; i < 20; i++)
-                        {
-                            string name = "charts" + i;
-                            <div class="canvasParent">
-                                <div id="@name"></div>
-                            </div>
-                        }
-                    </div>
-
                     <!--///////////////////-->
+                    @for (int i = 0; i < 20; i++)
+                     {
+                        string name = "charts" + i;
+                        <div class="canvasParent">
+                            <div id="@name"></div>
+                        </div>
+                     }
 
-                    <input type="button" style="float:right" class="btn btn-danger" id="chartButton" value="Show" />
-                    <input type="button" style="float:right" class="btn btn-success" id="answerHtml" value="html" />
                 </div>
+                <span style="float:right; margin-top:-15px; cursor:pointer" id="chartButton" class="glyphicon glyphicon-repeat"></span>
+                <span style="float:right;  cursor:pointer" id="answerHtml" class="glyphicon glyphicon-repeat"></span>
 
-                <h1>@Session["hello"]</h1>
 
-                    @RenderBody()
+                @RenderBody()
 
-                </div>
             </div>
+
+
+
+        </div>
+
+       
     </div>
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            $("#answerHtml").click(function () {
-               
-                $.ajax({
-                    url: '/Admin/answerHtml',
-                    type: "POST",
-
-                    contentType: "application/json",
-                    dataType: "json",
-
-                    success: function (data) {
-
-                        $("#root").html("");
-
-                        data.forEach(function (item) {
-                            $("#root").append(item);
-                        }) /////////////////////////////////////////////////////////////////////////////
-                    },
-                    error: function () {
-                        alert("ERROR");
-                    }
-                });
-
-            });
-
-            $("#chartButton").click(function () {
-
-                $.ajax({
-                    url: '/Admin/Chart',
-                    type: "POST",
-
-                    //data: JSON.stringify({ 'name': 'From user2' }),
-
-                    contentType: "application/json",
-                    dataType: "json",
-
-                    success: function (data) {
-                        showHigh(data);
-                    },
-                    error: function () {
-                        alert("ERROR");
-                    }
-                });
-            });
-
-            count = 0;
-            function showHigh(arr) {
-
-                var divName = "charts" + count;
-                count++;
-                var chartId = document.getElementById(divName);
-
-                var smartNames = JSON.parse(arr[0]);
-                var badNames = JSON.parse(arr[1]);
-                var alwaysSmartNames = JSON.parse(arr[2]);
-
-                // Build the chart
-                Highcharts.setOptions({
-                    colors: ['green', 'red', 'orange']
-                });
-
-                Highcharts.chart(chartId, {
-                    chart: {
-                        plotShadow: false,
-                        type: 'pie'
-                    },
-                    title: {
-                        text: ''
-                    },
-                    tooltip: {
-                        pointFormat: '{data.name}'
-                    },
-                    plotOptions: {
-                        pie: {
-                            allowPointSelect: true,
-                            cursor: 'pointer',
-                            dataLabels: {
-                                enabled: false
-                            },
-
-                        }
-                    },
-                    series: [{
-                        data: [{
-                            name: smartNames,
-                            y: smartNames.length
-                            
-                        },
-                        {
-                            name: badNames,
-                            y: badNames.length
-                        },
-                        {
-                            name: alwaysSmartNames,
-                            y: alwaysSmartNames.length,
-                            sliced: true,
-                            selected: true
-                        }]
-
-                    }]
-                })
-            };
-
-        });
-    </script>
+    </div>
+    
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
@@ -232,6 +128,7 @@
 
     <script>
 
+       
         function Create(o) {
 
             $.ajax({
@@ -251,7 +148,6 @@
                 }
             });
         }   /// LOGGED STUDENTS DEMO
-
 
     </script>
 

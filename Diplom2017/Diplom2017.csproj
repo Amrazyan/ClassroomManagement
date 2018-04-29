@@ -191,6 +191,7 @@
     </Compile>
     <Compile Include="Models\QuestAnswers.cs" />
     <Compile Include="Models\StatiscticsModel.cs" />
+    <Compile Include="Models\StatisticLists.cs" />
     <Compile Include="Models\Themes.cs" />
     <Compile Include="Models\UserAnswers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -221,6 +222,7 @@
     <Content Include="Content\myJS\HighCharts.js" />
     <Content Include="Content\myJS\Jquery.js" />
     <Content Include="Content\myJS\script.js" />
+    <Content Include="Content\myJS\userScripts.js" />
     <Content Include="Content\Photos\Logo.png" />
     <Content Include="App_Data\DBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

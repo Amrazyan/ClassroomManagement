@@ -11,6 +11,7 @@
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/css/mycss.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Content/myJS/userScripts.js"></script>
     <script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.js" type="text/javascript"></script>
 
     <meta charset="UTF-8">
@@ -26,102 +27,25 @@
             <div class="col-md-6 col-md-offset-3 col-sm-4 col-sm-offset-4 shadow">
                 <div style="padding-top:6%; padding-bottom:16%">
 
-
-                  @*  <form action="@Url.Action("Answers", "UserPage")" method="post" id="selected">*@
-
                         <h1>@Session["my"]</h1>
 
                         <h1 id="h"> @*Subjects*@</h1>
 
-                        <input type="hidden" name="userId" value="2" id="HiddenText" />
+                        <input type="hidden" name="userId" value="2" id="HiddenText" /> <!--change to real user id-->
 
                         <div id="questions" class="form-group">
-
-                            <!--Quesitons-->
-
+                            <div style="width:100%; text-align:center">
+                                <span id="read" class="glyphicon glyphicon-repeat userpageReload"></span>
+                            </div>
                         </div>
-
-                        <hr>
-                        <div id="usr">
-
-                        </div>
+                        <hr>                      
                         <div class="form-group">
-
-                            <button type="button" id="read" class="btn btn-submit" style="float:right"> Read Json </button>
-                            <button type="submit" id="sendAnswer" class="btn btn-success" style="float:right"> Send </button>
-
-                        </div>
-                    @*</form>*@
-
-
-                    <h2 id="h2"></h2>
+                            <button type="submit" id="sendAnswer" class="btn btn-success" style="float:right"> Պատասխանել </button>
+                        </div>                                        
                 </div>
             </div>
         </div>
     </div>
-    <script src="bootstrap/js/bootstrap.js">
-
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            $("#sendAnswer").click(function () {             
-
-                var userId = 2; //////////////////////////////CHANGE TO REAL USER ID
-
-                var radioButtons = $("#questions input:radio[name='radio']");
-
-                var right = $("#questions input:radio[name='radio'][value = '1']");
-                var rightIndex = radioButtons.index(right); 
-
-                var selected = $("input[type='radio'][name='radio']:checked");
-                var selectedIndex = radioButtons.index(selected);
-
-
-                var date = { "userAnswer": selected.val(), "userId": userId, "rightIndex": rightIndex, "selectedIndex": selectedIndex };
-
-                $.ajax({
-                    url: '/UserPage/Answers',
-                    type: "POST",
-
-                    contentType: "application/json",
-                    dataType: "json",
-                    data: JSON.stringify(date),
-
-                    success: function (data) {
-                        alert("success");
-                        $('#questions').html(data);
-                    },
-                    error: function () {
-                        alert("ERROR");
-                    }
-                });
-            });
-
-            $("#read").click(function () {
-
-                alert("Reading");
-
-                $.ajax({
-                    url: '/UserPage/ReadJson',
-                    type: "POST",
-
-                    contentType: "application/json",
-                    dataType: "html",
-
-                    success: function (data) {
-                        alert("success");
-                        $('#questions').html(data);
-                    },
-                    error: function () {
-                        alert("ERROR");
-                    }
-                });
-            });
-
-           
-
-        });
-    </script>
+    <script src="bootstrap/js/bootstrap.js"></script>
 </body>
 </html>

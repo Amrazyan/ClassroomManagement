@@ -215,6 +215,8 @@ namespace Diplom2017
             ////////////////////////////////////////////
 
             List<StatiscticsModel> statistics = new List<StatiscticsModel>();
+            List<StatisticLists> studentStats = new List<StatisticLists>();
+            List<string> test;
             using (DiplomeEntities db = new DiplomeEntities())
             {
                 statistics = (from stud_answ in db.Stud_Answers
@@ -223,9 +225,31 @@ namespace Diplom2017
                               //where stud_answ.theme_id == currentThemeId
 
                               group stud_answ by new { student.Name , student.Surname, stud_answ.answer_data} into gr
+                              orderby gr.Key.Name,gr.Key.Surname
                               select new StatiscticsModel { Name = gr.Key.Name + " " + gr.Key.Surname, Percent = gr.Average(g => g.answer_percent), Date = gr.Key.answer_data}).ToList();
+
+                test = (from stati in statistics                            
+                            group stati by new { stati.Name } into g
+                            select  g.Key.Name).ToList();
             }
-            var stat = JsonConvert.SerializeObject(statistics);
+            foreach (var item in test)
+            {
+                StatisticLists st = new StatisticLists();
+                st.Name = item;
+                List<double> percents = (from stati in statistics
+                                         where stati.Name == item
+                                         select stati.Percent).ToList();
+                List<DateTime> datas = (from stati in statistics
+                                         where stati.Name == item
+                                         select stati.Date).ToList();
+
+                st.Percents = percents;
+                st.Datas = datas;
+
+                studentStats.Add(st);
+
+            }
+            var stat = JsonConvert.SerializeObject(studentStats);
             Session["Statistics"] = stat;
             return View();
         }
